@@ -17,3 +17,75 @@ button,
 a {
   font: inherit;
 }
+/* ================================
+   COVER PAGE
+================================ */
+
+.cover-page {
+  min-height: 100vh;
+  padding: 48px 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--ivory);
+  color: var(--forest);
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.cover-top,
+.cover-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cover-label,
+.cover-bottom {
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+}
+
+.cover-line {
+  flex: 1;
+  height: 1px;
+  margin: 0 24px;
+  background: var(--taupe);
+}
+
+.cover-content {
+  max-width: 900px;
+}
+
+.cover-year {
+  margin: 0 0 12px;
+  font-family: "DM Mono", monospace;
+  font-size: 18px;
+  letter-spacing: 0.18em;
+  color: var(--sage);
+}
+
+.cover-content h1 {
+  margin: 0;
+  font-family: "DM Serif Display", serif;
+  font-size: clamp(72px, 10vw, 150px);
+  font-weight: 400;
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+}
+
+.cover-content h1 em {
+  color: var(--sage);
+  font-style: normal;
+}
+
+.cover-tagline {
+  margin-top: 36px;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  color: var(--charcoal);
+}
+
+.cover-bottom {
+  color: var(--forest);
+}
