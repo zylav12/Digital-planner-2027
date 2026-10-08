@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2027 Ultimate Intentional Life Planner — 480 Pages</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+:root{--terra:#C86D51;--blush:#E2A992;--linen:#FDF9F6;--white:#fff;--ink:#2B2523;--line:#EADCD3;--soft:#FBEEE8}
+@page{size:A4 landscape;margin:0}
+*{box-sizing:border-box}
+html,body{margin:0;background:#EFE7E1;color:var(--ink);font-family:'Plus Jakarta Sans',Arial,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{position:relative;width:297mm;height:210mm;background:var(--linen);overflow:hidden;margin:12px auto;padding:12mm 28mm 11mm 14mm;page-break-after:always;break-after:page}
+@media screen{.page{box-shadow:0 6px 24px rgba(43,37,35,.15)}}@media print{html,body{background:none}.page{margin:0;box-shadow:none}}
+h1,h2,h3{font-family:'Marcellus',Georgia,serif;font-weight:400;color:var(--terra);margin:0}
+h1{font-size:26pt;letter-spacing:.04em}h2{font-size:16pt;border-bottom:1px solid var(--line);padding-bottom:4px;margin-bottom:8px}
+h3{font-size:10.5pt;color:var(--ink);margin-bottom:4px}.sub{font-size:7.5pt;text-transform:uppercase;letter-spacing:.18em;color:var(--terra);font-weight:700}
+.topbar{position:absolute;left:14mm;top:6mm;font-size:6.5pt;letter-spacing:.14em;text-transform:uppercase;color:var(--blush);font-weight:700}
+.homebtn{position:absolute;right:30mm;top:5mm;font-size:6.5pt;font-weight:700;color:var(--terra);border:1px solid var(--terra);padding:2px 9px;border-radius:20px;letter-spacing:.08em}
+.tabs{position:absolute;right:0;top:14mm;width:20mm;display:flex;flex-direction:column;gap:2px;max-height:184mm;overflow:hidden}
+.tab{background:var(--blush);color:#fff;font-size:5.3pt;font-weight:700;text-align:center;min-height:7mm;line-height:7mm;text-transform:uppercase;border-radius:4px 0 0 4px}
+.tab:nth-child(odd){background:var(--terra)}.tab.on{background:var(--ink)}
+.cover{padding:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:radial-gradient(circle at 50% 40%,#fff 0,var(--linen) 65%,#F6E9E1 100%)}
+.frame{position:absolute;inset:8mm;border:2px solid var(--terra)}.frame:before{content:'';position:absolute;inset:3mm;border:1px solid var(--blush)}
+.badge{font-size:8pt;letter-spacing:.3em;font-weight:700;color:var(--terra);border:1px solid var(--terra);padding:5px 16px;border-radius:30px}
+.ctitle{font-size:40pt;line-height:1.15;margin:14px 0 10px}.divider{width:60mm;height:1px;background:var(--blush);margin:6px 0 14px}
+.quote{font-size:13pt;font-style:italic;max-width:150mm;margin:0 0 22px;line-height:1.5}.start{background:var(--terra);color:#fff;padding:10px 28px;border-radius:30px;font-weight:700;letter-spacing:.12em;font-size:9pt}
+.card{background:var(--white);border:1px solid var(--line);border-radius:6px;padding:7px 9px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.lines{width:100%;height:100%;min-height:25mm;border:0;outline:0;resize:none;font:8.5pt 'Plus Jakarta Sans';background:repeating-linear-gradient(to bottom,transparent 0,transparent 15px,var(--line) 15px,var(--line) 16px)}
+input,textarea{font-family:inherit;color:var(--ink);background:transparent;border:0;outline:0;resize:none;width:100%}
+input{border-bottom:1px solid var(--line);padding:3px 2px;font-size:8pt}
+.checklist div{display:flex;gap:7px;align-items:center;padding:4px 0;border-bottom:1px solid var(--line);font-size:8pt}
+.check{width:11px;height:11px;border:1px solid var(--blush);border-radius:3px;display:inline-block}
+.mhead{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}.mbody{display:grid;grid-template-columns:150mm 1fr;gap:10px;height:166mm}
+.dow{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:3px}.dow span{text-align:center;font-size:7pt;font-weight:700;color:var(--terra);text-transform:uppercase}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;height:calc(100% - 22px);grid-auto-rows:1fr}
+.c{background:#fff;border:1px solid var(--line);border-radius:4px;padding:3px 4px;font-size:7.5pt;overflow:hidden}.c b{font-family:'Marcellus';font-size:9pt}.c i{display:block;font-style:normal;font-size:5.5pt;color:var(--terra);font-weight:700}
+.c.ev{background:var(--soft)}.c.empty{background:transparent;border-color:transparent}
+.side{display:flex;flex-direction:column;gap:8px}.side .card{flex:1;display:flex;flex-direction:column}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;height:149mm}.week .card{padding:5px;display:flex;flex-direction:column}.week h3{text-align:center;border-bottom:1px solid var(--line);padding-bottom:3px;font-size:8.5pt}.week textarea{flex:1}
+.daily{display:grid;grid-template-columns:65mm 1fr;gap:9px;height:150mm}.hours{display:flex;flex-direction:column}.hour{flex:1;border-top:1px solid var(--line);font-size:6.5pt;color:var(--terra);padding-top:2px}
+.water{display:flex;gap:5px;flex-wrap:wrap}.water .check{width:14px;height:14px;border-radius:50%}
+table{width:100%;border-collapse:collapse;font-size:8pt}th{color:var(--terra);font-size:7pt;text-transform:uppercase;text-align:left;border-bottom:1px solid var(--terra);padding:4px}td{border-bottom:1px solid var(--line);padding:5px 3px}
+.note{height:146mm;border:1px solid var(--line);border-radius:6px;background-color:#fff;background-image:radial-gradient(circle,var(--line) 1px,transparent 1.2px);background-size:10mm 10mm;padding:8px}
+.footer{position:absolute;bottom:5mm;left:14mm;font-size:6pt;color:var(--blush);letter-spacing:.1em}.pnum{position:absolute;bottom:5mm;right:30mm;font-size:6pt;color:var(--blush)}
+.idx{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}.idx a{background:#fff;border:1px solid var(--line);border-radius:6px;padding:10px 12px;font-size:9pt;font-weight:600}.idx b{color:var(--terra);font-family:Marcellus;margin-right:8px}
+.yeargrid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.mini{background:#fff;border:1px solid var(--line);border-radius:5px;padding:5px}.mini h3{text-align:center;font-size:8pt}.mini table{font-size:5.3pt;text-align:center}.mini td,.mini th{padding:1px;border:0;text-align:center}.mini .ev{background:var(--soft);color:var(--terra)}
+.heroGrid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:9px;height:151mm}.heroGrid .card{display:flex;flex-direction:column}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+const EVENTS={'1-1':"New Year's Day",'2-4':'World Cancer Day','3-8':"Int'l Women's Day",'3-20':'Intl Day of Happiness','4-22':'Earth Day','6-5':'World Environment Day','7-30':'Intl Day of Friendship','8-12':'Intl Youth Day','9-21':'Intl Day of Peace','10-10':'World Mental Health Day','11-16':'Intl Day for Tolerance','12-10':'Human Rights Day'};
+const pad=n=>String(n).padStart(2,'0');
+const app=document.getElementById('app');
+let pages=[];
+
+function page(id,section,title,body,cls=''){
+  pages.push(`<section class="page ${cls}" id="${id}" data-section="${section}"><div class="topbar">${section}</div><a class="homebtn" href="#index">HOME</a><div>${body}</div><div class="footer">2027 ULTIMATE INTENTIONAL LIFE PLANNER</div><div class="pnum"></div></section>`);
+}
+function linesCard(title='Notes',height='') { return `<div class="card" style="${height}"><h3>${title}</h3><textarea class="lines"></textarea></div>`; }
+function checklist(title,items=6){
+ let s=`<div class="card"><h3>${title}</h3><div class="checklist">`;
+ for(let i=1;i<=items;i++) s+=`<div><span class="check"></span><input placeholder="Write here..."></div>`;
+ return s+'</div></div>';
+}
+function monthlyCalendar(m){
+ const first=new Date(2027,m,1),off=(first.getDay()+6)%7,n=new Date(2027,m+1,0).getDate();
+ let cells=''; for(let i=0;i<off;i++)cells+='<div class="c empty"></div>';
+ for(let d=1;d<=n;d++){let ev=EVENTS[(m+1)+'-'+d];cells+=`<div class="c ${ev?'ev':''}"><b>${d}</b>${ev?`<i>${ev}</i>`:''}</div>`}
+ return `<div class="dow">${DAYS.map(x=>`<span>${x}</span>`).join('')}</div><div class="cal">${cells}</div>`;
+}
+function monthPage(m){
+ page('m-'+pad(m+1),pad(m+1),`Monthly • ${MONTHS[m]}`,`
+ <div class="mhead"><span class="sub">2027</span><h1>${MONTHS[m]}</h1></div>
+ <div class="mbody"><div>${monthlyCalendar(m)}</div><div class="side">
+ ${linesCard('Monthly Goals')} ${linesCard('Key Dates & Focus')} ${linesCard('Monthly Review')}
+ </div></div>`);
+}
+function weeklyPage(w,m,weekStart){
+ const start=new Date(2027,0,4+7*w), end=new Date(start); end.setDate(start.getDate()+6);
+ const label=`${MONTHS[start.getMonth()].slice(0,3)} ${start.getDate()}–${MONTHS[end.getMonth()].slice(0,3)} ${end.getDate()}, 2027`;
+ page('week-'+pad(w+1),'Weekly',`Week ${w+1}`,`
+ <div class="sub">${label}</div><h1>Weekly Focus</h1>
+ <div class="grid3" style="margin:7px 0"><div class="card"><h3>Weekly Intention</h3><input></div><div class="card"><h3>Top 3 Priorities</h3><input><input><input></div><div class="card"><h3>Habit Focus</h3><input><input><input></div></div>
+ <div class="week">${DAYS.map((d,i)=>`<div class="card"><h3>${d}</h3><small style="color:var(--blush)">${new Date(start.getTime()+i*86400000).getDate()}</small><textarea class="lines"></textarea></div>`).join('')}</div>`);
+}
+function dailyPage(d){
+ const date=new Date(2027,0,4+d); const label=date.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+ let hrs='';for(let h=6;h<=21;h++)hrs+=`<div class="hour">${pad(h)}:00</div>`;
+ page('day-'+pad(d+1),'Daily',`Day ${d+1}`,`
+ <div class="sub">${label}</div><h1>Intentional Day</h1>
+ <div class="daily" style="margin-top:7px"><div class="hours">${hrs}</div><div class="grid2">
+ <div class="card"><h3>Top 3 Priorities</h3><input placeholder="Priority 1"><input placeholder="Priority 2"><input placeholder="Priority 3">${linesCard('Quick Notes','flex:1;margin-top:8px')}</div>
+ <div class="card"><h3>Gratitude</h3><textarea class="lines" style="height:38mm"></textarea><h3 style="margin-top:7px">Water</h3><div class="water">${'<span class="check"></span>'.repeat(8)}</div>${linesCard('Daily Reflection','flex:1;margin-top:8px')}</div>
+ </div></div>`);
+}
+function trackerPage(i){
+ const names=['Habit Tracker','Mood Tracker','Sleep Tracker','Water Tracker','Movement Tracker','Reading Tracker','Self-Care Tracker','Meal Tracker','Screen-Time Tracker','Gratitude Tracker','Wellness Check-In','30-Day Challenge'];
+ page('tracker-'+pad(i+1),'Wellness',names[i],`
+ <h1>${names[i]}</h1><div class="sub">Build consistency, not perfection.</div>
+ <div class="grid2" style="margin-top:10px;height:145mm">${linesCard('Monthly Tracking')} ${linesCard('Reflection & Insights')}</div>`);
+}
+function financePage(i){
+ const names=['Monthly Budget','Expense Tracker','Savings Goals','Debt Payoff','Subscription Tracker','No-Spend Challenge','Income Tracker','Financial Goals','Wishlist Budget','Annual Money Review'];
+ page('finance-'+pad(i+1),'Finance',names[i],`
+ <h1>${names[i]}</h1><div class="sub">Plan • Track • Reflect</div>
+ <div class="grid2" style="margin-top:10px">${checklist('Categories',8)}${linesCard('Notes & Decisions','height:140mm')}</div>`);
+}
+function bonusPage(i){
+ const names=['Bucket List','Books to Read','Movies to Watch','Places to Visit','Gift Planner','Important Dates','Project Planner','Cleaning Schedule','Meal Planner','Packing List','Travel Planner','Study Planner','Work Planner','Content Planner','Ideas Vault'];
+ page('bonus-'+pad(i+1),'Bonus',names[i],`<h1>${names[i]}</h1><div class="grid2" style="margin-top:10px;height:145mm">${checklist('Plan',8)}${linesCard('Notes','')}</div>`);
+}
+
+/* Cover */
+app.insertAdjacentHTML('beforeend',`<section class="page cover" id="cover"><div class="frame"></div><span class="badge">DIGITAL PLANNER 2027</span><h1 class="ctitle">INTENTIONAL<br>LIVING PLANNER</h1><div class="divider"></div><blockquote class="quote">“Write your own story, one intentional day at a time.”</blockquote><a class="start" href="#index">ENTER PLANNER / START HERE</a></section>`);
+
+/* 2 navigation pages */
+page('index','Contents','Master Index',`<h1>Master Index</h1><div class="idx">
+<a href="#year"><b>01</b>Year at a Glance</a><a href="#vision"><b>02</b>Vision & Goals</a>
+<a href="#quarter-1"><b>03</b>Quarterly Planning</a><a href="#m-01"><b>04</b>Monthly Planning</a>
+<a href="#week-01"><b>05</b>Weekly Planning</a><a href="#day-01"><b>06</b>Daily Planning</a>
+<a href="#finance-01"><b>07</b>Finance</a><a href="#tracker-01"><b>08</b>Wellness</a>
+<a href="#bonus-01"><b>09</b>Bonus Templates</a><a href="#notes-01"><b>10</b>Notes & Brainstorming</a></div>`);
+page('guide','Getting Started','How to Use Your Planner',`<h1>Welcome to Your Intentional Year</h1><div class="heroGrid" style="margin-top:10px">${linesCard('How I Want 2027 to Feel')}${checklist('Before You Begin',6)}${linesCard('My Planner Rules')}${linesCard('A Note to My Future Self')}</div>`);
+
+/* yearly + vision: 15 total pages including index/guide below */
+page('year','Yearly','Year at a Glance',`<h1>2027 Year at a Glance</h1><div class="yeargrid" style="margin-top:8px">${MONTHS.map((m,i)=>`<div class="mini"><h3>${m}</h3><table><tr>${DAYS.map(d=>`<th>${d[0]}</th>`).join('')}</tr>${Array.from({length:5},(_,r)=>`<tr>${Array.from({length:7},(_,c)=>`<td>${r*7+c+1<=new Date(2027,i+1,0).getDate()?(r*7+c+1):''}</td>`).join('')}</tr>`).join('')}</table></div>`).join('')}</div>`);
+for(let i=0;i<14;i++) page('year-extra-'+pad(i+1),'Yearly',`Annual Planning • ${i+1}`,`<h1>${['Yearly Intentions','Life Areas','Annual Priorities','Personal Growth','Career Vision','Health Vision','Relationships','Home & Environment','Learning Plan','Creative Goals','Adventure List','Things to Stop','Things to Start','End-of-Year Vision'][i]}</h1><div class="grid2" style="margin-top:10px;height:145mm">${linesCard('Reflection')}${linesCard('Action Plan')}</div>`);
+page('vision','Vision & Goals','Vision Board & Annual Goals',`<h1>Vision & Annual Goals</h1><div class="heroGrid" style="margin-top:8px">${linesCard('My Vision for 2027')}${linesCard('Why This Matters')}${checklist('Top 5 Goals',5)}${linesCard('Future Me')}</div>`);
+for(let i=0;i<19;i++)page('goal-'+pad(i+1),'Vision & Goals',`Goal System • ${i+1}`,`<h1>${['Goal Brain Dump','Goal Breakdown','Milestone Map','Action Steps','Quarterly Goal Map','Monthly Goal Map','Goal Habit Link','Obstacle Plan','Motivation Bank','Success Metrics','Progress Review','Goal Reset','Priority Matrix','Focus List','Project Roadmap','Dream-to-Plan','Accountability','Celebration Log','Annual Goal Review'][i]}</h1><div class="grid2" style="margin-top:10px;height:145mm">${checklist('Action Steps',8)}${linesCard('Notes & Reflection')}</div>`);
+
+/* 24 quarterly pages */
+for(let q=1;q<=4;q++)for(let j=0;j<6;j++)page(`quarter-${q}-${j+1}`,'Quarterly',`Q${q} • Planning ${j+1}`,`<h1>Quarter ${q} Planning</h1><div class="sub">January–March / April–June / July–September / October–December</div><div class="grid2" style="margin-top:10px;height:145mm">${linesCard('Quarterly Focus')}${checklist('Quarterly Actions',8)}</div>`);
+
+/* 12 monthly + 60 additional monthly pages = 72 */
+for(let m=0;m<12;m++){monthPage(m);for(let j=0;j<5;j++)page(`m-${pad(m+1)}-extra-${j+1}`,'Monthly',`${MONTHS[m]} • ${['Goals','Habit & Mood','Finance','Self-Care','Reflection'][j]}`,`<h1>${MONTHS[m]} ${['Goals','Habit & Mood','Finance','Self-Care','Reflection'][j]}</h1><div class="grid2" style="margin-top:10px;height:145mm">${checklist('Focus',8)}${linesCard('Notes')}</div>`)}
+
+/* 52 weekly + 104 extra weekly = 156 */
+for(let w=0;w<52;w++){weeklyPage(w,0,0);for(let j=0;j<2;j++)page(`week-${pad(w+1)}-extra-${j+1}`,'Weekly',`Week ${w+1} • ${j===0?'Reflection':'Planning'}`,`<h1>Week ${w+1} ${j===0?'Reflection':'Planning'}</h1><div class="grid2" style="margin-top:10px;height:145mm">${linesCard(j===0?'Wins & Lessons':'Plan Ahead')}${checklist(j===0?'What Worked':'Priorities',8)}</div>`)}
+
+/* 90 daily pages */
+for(let d=0;d<90;d++)dailyPage(d);
+
+/* 20 finance, 18 wellness */
+for(let i=0;i<20;i++)financePage(i);
+for(let i=0;i<18;i++)trackerPage(i);
+
+/* 12 self-care */
+for(let i=0;i<12;i++)page('selfcare-'+pad(i+1),'Self-Care',`Self-Care • ${i+1}`,`<h1>Intentional Self-Care</h1><div class="grid2" style="margin-top:10px;height:145mm">${checklist('Care List',8)}${linesCard('How I Feel')}</div>`);
+
+/* 15 notes */
+for(let i=0;i<15;i++)page('notes-'+pad(i+1),'Notes',`Notes • ${i+1}`,`<h1>Notes & Brainstorming</h1><div class="note" style="margin-top:8px"><textarea style="height:100%;background:transparent"></textarea></div>`);
+
+/* 15 bonus */
+for(let i=0;i<15;i++)bonusPage(i);
+
+/* Add missing pages to exactly 480 total INCLUDING cover */
+let total=1+pages.length;
+let filler=480-total;
+for(let i=0;i<filler;i++)page('extra-'+pad(i+1),'Bonus','Bonus Notes',`<h1>Extra Notes & Ideas</h1><div class="note" style="margin-top:8px"><textarea style="height:100%;background:transparent"></textarea></div>`);
+
+/* navigation */
+const sections=[
+ ['index','Index','#index'],['year','Year','#year'],['goals','Goals','#vision'],
+ ['q','Quarter','#quarter-1-1'],['01','Jan','#m-01'],['02','Feb','#m-02'],['03','Mar','#m-03'],
+ ['04','Apr','#m-04'],['05','May','#m-05'],['06','Jun','#m-06'],['07','Jul','#m-07'],['08','Aug','#m-08'],
+ ['09','Sep','#m-09'],['10','Oct','#m-10'],['11','Nov','#m-11'],['12','Dec','#m-12'],
+ ['wk','Weekly','#week-01'],['day','Daily','#day-01'],['fin','Finance','#finance-01'],['well','Wellness','#tracker-01'],['note','Notes','#notes-01']
+];
+document.getElementById('app').insertAdjacentHTML('beforeend',pages.join(''));
+const all=[...document.querySelectorAll('.page')];
+all.forEach((p,i)=>{
+ const tabs=document.createElement('div');tabs.className='tabs';
+ tabs.innerHTML=sections.map(([k,l,h])=>`<a class="tab" href="${h}">${l}</a>`).join('');
+ p.appendChild(tabs);
+ const n=p.querySelector('.pnum'); if(n)n.textContent=`${i+1} / 480`;
+});
+document.title=`2027 Ultimate Intentional Life Planner — ${all.length+1} Pages`;
+console.log('Generated pages:',all.length+1);
+</script>
+</body>
+</html>
