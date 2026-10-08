@@ -622,3 +622,245 @@ img {
     font-size: 9px;
   }
 }
+/* =========================================================
+   VISION PAGE
+========================================================= */
+
+.planner-page {
+  min-height: 100vh;
+  padding: 64px;
+  background: var(--ivory);
+  color: var(--charcoal);
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.planner-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+
+  padding-bottom: 42px;
+  border-bottom: 1px solid var(--beige);
+}
+
+.page-eyebrow {
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sage);
+}
+
+.planner-page-header h2 {
+  margin: 18px 0 10px;
+
+  font-family: "DM Serif Display", serif;
+  font-size: clamp(48px, 6vw, 76px);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+
+  color: var(--forest);
+}
+
+.planner-page-header p {
+  max-width: 520px;
+  margin: 0;
+
+  font-size: 14px;
+  line-height: 1.7;
+
+  color: var(--charcoal);
+}
+
+.page-number {
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--taupe);
+}
+
+
+/* =========================================================
+   VISION GRID
+========================================================= */
+
+.vision-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 18px;
+
+  margin-top: 32px;
+}
+
+
+/* =========================================================
+   VISION CARDS
+========================================================= */
+
+.vision-card {
+  min-height: 260px;
+
+  padding: 28px;
+
+  background: #ffffff;
+
+  border: 1px solid var(--beige);
+  border-radius: 18px;
+
+  position: relative;
+}
+
+.vision-card-large {
+  grid-column: span 2;
+  min-height: 300px;
+
+  background: var(--sage);
+  color: var(--forest);
+}
+
+.vision-card > span {
+  display: block;
+
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+
+  color: var(--sage);
+}
+
+.vision-card-large > span {
+  color: var(--forest);
+}
+
+.vision-card h3 {
+  max-width: 620px;
+
+  margin: 18px 0 0;
+
+  font-family: "DM Serif Display", serif;
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 1.1;
+
+  color: var(--forest);
+}
+
+
+/* =========================================================
+   WRITING LINES
+========================================================= */
+
+.writing-lines {
+  position: absolute;
+
+  left: 28px;
+  right: 28px;
+  bottom: 28px;
+
+  height: 115px;
+
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 27px,
+      var(--beige) 28px
+    );
+}
+
+.vision-card-large .writing-lines {
+  height: 105px;
+
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 25px,
+      rgba(64, 80, 71, 0.25) 26px
+    );
+}
+
+
+/* =========================================================
+   VISION FOOTER
+========================================================= */
+
+.vision-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-top: 30px;
+  padding-top: 16px;
+
+  border-top: 1px solid var(--beige);
+
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  color: var(--taupe);
+}
+
+
+/* =========================================================
+   VISION RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .planner-page {
+    padding: 40px 24px;
+  }
+
+  .planner-page-header {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .vision-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vision-card-large {
+    grid-column: span 1;
+  }
+
+  .vision-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+
+
+@media (max-width: 520px) {
+
+  .planner-page {
+    padding: 32px 18px;
+  }
+
+  .planner-page-header h2 {
+    font-size: 46px;
+  }
+
+  .vision-card {
+    padding: 22px;
+  }
+
+  .writing-lines {
+    left: 22px;
+    right: 22px;
+    bottom: 22px;
+  }
+}
