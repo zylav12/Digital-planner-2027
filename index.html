@@ -1,678 +1,590 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>2027 Ultimate Intentional & Reading Planner</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root{
-  --white:#FFFFFF;
-  --offwhite:#FAFAFA;
-  --t1:#C86D51;
-  --t2:#A95C43;
-  --t3:#8B4833;
-  --ink:#1A1A1A;
-  --line:#ECECEC;
-  --muted:#8A8A8A;
-}
-*{box-sizing:border-box}
-html,body{margin:0;height:100%}
-body{
-  background:#EDEDED;
-  font-family:'Plus Jakarta Sans',Inter,Arial,sans-serif;
-  color:var(--ink);
-  -webkit-print-color-adjust:exact;print-color-adjust:exact;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2027 Luxury Terracotta Digital Planner</title>
+  
+  <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-page: #F5F5F5;
+      --paper-white: #FFFFFF;
+      --terracotta: #C86D51;
+      --terracotta-dark: #A95C43;
+      --terracotta-soft: #FBF4F1;
+      --ink-primary: #1A1A1A;
+      --ink-muted: #736E6B;
+      --border-color: #EBE7E3;
+      --tab-dark-top: #323232;
+      --tab-dark-bottom: #1C1C1C;
+      --shadow-soft: 0 12px 36px rgba(0, 0, 0, 0.08);
+      --radius-card: 12px;
+    }
 
-/* ---------- TOOLBAR ---------- */
-.toolbar{
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  padding:12px;flex-wrap:wrap;
-}
-.toolbar button,.toolbar input{
-  font:inherit;font-size:13px;border:1px solid var(--t2);background:#fff;color:var(--t3);
-  border-radius:999px;padding:7px 14px;cursor:pointer;
-}
-.toolbar button:hover{background:var(--t2);color:#fff}
-.toolbar input{width:90px;text-align:center;cursor:text;border-color:#D8D8D8;color:var(--ink)}
-.toolbar .pg{font-size:13px;color:var(--muted);min-width:120px;text-align:center}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ---------- BOOK ---------- */
-.book{
-  position:relative;
-  width:min(1080px,96vw);
-  margin:0 auto;
-  aspect-ratio:297/210;
-  background:var(--white);
-  box-shadow:0 12px 34px rgba(0,0,0,.14);
-  border-radius:6px;
-  overflow:hidden;
-}
-.stage{position:absolute;inset:0;}
-.page{
-  position:absolute;inset:0;
-  padding:26px 84px 22px 54px;
-  background:var(--white);
-  overflow:auto;
-}
-.eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--t2);font-weight:700;margin-bottom:2px}
-h1{
-  font-family:'Playfair Display',Georgia,serif;font-weight:600;
-  font-size:30px;letter-spacing:.04em;color:var(--t3);margin:0 0 10px;
-}
-h2{font-family:'Playfair Display',Georgia,serif;font-size:18px;color:var(--t3);margin:0 0 6px;font-weight:600}
-h3{font-size:11px;text-transform:uppercase;letter-spacing:.12em;margin:0 0 6px;color:var(--ink);font-weight:700}
-.muted{color:var(--muted);font-size:12px}
-.card{background:var(--offwhite);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
-.grid{display:grid;gap:12px}
-.g2{grid-template-columns:1fr 1fr}
-.g3{grid-template-columns:repeat(3,1fr)}
-.g4{grid-template-columns:repeat(4,1fr)}
-.g7{grid-template-columns:repeat(7,1fr)}
-.flex{display:flex;flex-direction:column;gap:10px;height:100%}
-.fill{flex:1;min-height:0}
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-page);
+      color: var(--ink-primary);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 16px;
+    }
 
-/* Blank paper notepad: no lines, no dots */
-.notepad{
-  width:100%;height:100%;min-height:80px;
-  background:var(--white);border:1px solid var(--line);border-radius:10px;
-  padding:12px;font:inherit;font-size:13px;color:var(--ink);
-  resize:none;outline:none;
-}
-.notepad:focus{border-color:var(--t1)}
+    /* Main Shell */
+    .planner-shell {
+      width: 100%;
+      max-width: 1180px;
+      height: 760px;
+      background: var(--paper-white);
+      border-radius: 18px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-color);
+      display: flex;
+      overflow: hidden;
+      position: relative;
+    }
 
-input.ln{
-  width:100%;border:none;border-bottom:1px solid var(--line);background:transparent;
-  font:inherit;font-size:13px;padding:6px 2px;outline:none;color:var(--ink);
-}
-input.ln:focus{border-bottom-color:var(--t1)}
-select.ln{
-  font:inherit;font-size:13px;border:1px solid var(--line);border-radius:6px;padding:4px 6px;background:#fff;color:var(--ink);
-}
-.lbl{font-size:12px;color:var(--t3);font-weight:600}
+    /* Left Spine Accent Line */
+    .planner-spine {
+      width: 10px;
+      background: linear-gradient(180deg, var(--terracotta) 0%, var(--terracotta-dark) 100%);
+      flex-shrink: 0;
+    }
 
-/* Cover */
-.cover{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
-  background:var(--white);
-}
-.cover .frame{position:absolute;inset:22px;border:1px solid var(--t1);border-radius:4px;pointer-events:none}
-.cover .eb{font-size:11px;letter-spacing:.4em;color:var(--t2);font-weight:700}
-.cover .hero{font-size:60px;line-height:1.05;margin:18px 0 14px}
-.cover .rule{width:90px;height:1px;background:var(--t1);margin:0 0 16px}
-.cover p{font-family:'Playfair Display',serif;font-style:italic;font-size:18px;color:var(--ink);margin:0 0 26px}
-.btn{
-  display:inline-block;text-decoration:none;background:var(--t2);color:#fff;
-  padding:12px 30px;border-radius:999px;font-weight:600;font-size:13px;letter-spacing:.06em;
-}
-.btn:hover{background:var(--t3)}
+    /* Central Content Area */
+    .planner-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 32px 38px;
+      overflow-y: auto;
+      background-color: var(--paper-white);
+    }
 
-/* Index */
-.idx{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:8px}
-.idx a{
-  display:flex;justify-content:space-between;align-items:center;text-decoration:none;color:var(--ink);
-  background:var(--offwhite);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-weight:600;font-size:13px;
-}
-.idx a:hover{border-color:var(--t1);color:var(--t3)}
-.idx a small{color:var(--muted);font-weight:500;font-size:11px}
+    /* Header Styling */
+    .planner-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 22px;
+      padding-bottom: 14px;
+      border-bottom: 1.5px solid var(--border-color);
+    }
 
-/* Calendars */
-.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
-.cal .dh{font-size:10px;text-transform:uppercase;color:var(--muted);text-align:center;font-weight:700;padding:3px 0}
-.cal a{
-  display:flex;flex-direction:column;justify-content:space-between;
-  min-height:58px;background:var(--offwhite);border:1px solid var(--line);border-radius:8px;
-  padding:5px 6px;text-decoration:none;color:var(--ink);font-family:'Playfair Display',serif;font-size:15px;font-weight:600;
-}
-.cal a:hover{border-color:var(--t1)}
-.cal a.hol{background:#F6E6DE}
-.cal a small{font-family:'Plus Jakarta Sans',sans-serif;font-size:8.5px;color:var(--t2);line-height:1.2;font-weight:600}
-.cal .blank{min-height:58px}
-.mini{background:var(--offwhite);border:1px solid var(--line);border-radius:10px;padding:8px}
-.mini a{display:block;text-align:center;font-family:'Playfair Display',serif;color:var(--t3);text-decoration:none;font-weight:600;font-size:14px;margin-bottom:4px}
-.mini .mg{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;font-size:8px;text-align:center}
-.mini .mg span{padding:1px 0}
-.mini .mg .h{color:var(--muted);font-weight:700}
+    .header-title h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28pt;
+      font-weight: 600;
+      color: var(--terracotta);
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+    }
 
-/* Reading */
-table.t{width:100%;border-collapse:collapse;font-size:12px}
-table.t th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--t2);border-bottom:1px solid var(--t2);padding:6px 4px}
-table.t td{border-bottom:1px solid var(--line);padding:2px 4px}
-table.t td input{padding:6px 2px;font-size:12px}
-.chk{display:grid;grid-template-columns:repeat(13,1fr);gap:5px;margin-top:6px}
-.box{
-  aspect-ratio:1;border:1px solid #D9D9D9;border-radius:4px;background:#fff;cursor:pointer;padding:0;
-  font-size:9px;color:var(--muted);
-}
-.box.on{background:var(--t1);border-color:var(--t1);color:#fff}
+    .header-title p {
+      font-size: 8.5pt;
+      color: var(--ink-muted);
+      margin-top: 5px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
 
-/* Daily schedule */
-.sched{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;height:100%;display:flex;flex-direction:column}
-.hrow{display:grid;grid-template-columns:64px 1fr;flex:1;border-bottom:1px solid var(--line);min-height:22px}
-.hrow:last-child{border-bottom:0}
-.hrow .t{font-size:10px;color:var(--t2);font-weight:700;padding:6px 8px;background:var(--offwhite);border-right:1px solid var(--line)}
-.hrow input{padding:2px 8px;font-size:12px;border:none;border-bottom:none}
+    .year-tag {
+      font-family: 'Playfair Display', serif;
+      font-size: 13pt;
+      font-style: italic;
+      color: var(--terracotta-dark);
+      border: 1px solid var(--terracotta);
+      padding: 4px 18px;
+      border-radius: 20px;
+      background-color: var(--terracotta-soft);
+    }
 
-/* Finance & habits */
-.habits{display:grid;grid-template-columns:150px repeat(31,1fr);gap:3px;align-items:center}
-.habits .hd{font-size:9px;color:var(--muted);text-align:center;font-weight:700}
-.habits .hn{font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.habits .box{border-radius:3px}
+    /* Right 3D Tab Sidebar */
+    .tab-sidebar {
+      width: 52px;
+      background: #121212;
+      display: flex;
+      flex-direction: column;
+      padding: 12px 0;
+      gap: 3px;
+      overflow-y: auto;
+      border-left: 1px solid #222;
+      flex-shrink: 0;
+    }
 
-.badge-n{font-size:11px;color:var(--muted)}
+    /* Individual 3D Dark Tab */
+    .tab-item {
+      background: linear-gradient(180deg, var(--tab-dark-top) 0%, var(--tab-dark-bottom) 100%);
+      color: #D6D6D6;
+      writing-mode: vertical-rl;
+      text-transform: uppercase;
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      padding: 14px 6px;
+      border-radius: 0 8px 8px 0;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+      box-shadow: 
+        inset 0 1px 1px rgba(255, 255, 255, 0.12),
+        2px 2px 5px rgba(0, 0, 0, 0.4);
+      user-select: none;
+    }
 
-/* ---------- SIDEBAR TABS ---------- */
-.tabs{
-  position:absolute;right:0;top:18px;bottom:18px;width:66px;
-  display:flex;flex-direction:column;gap:4px;
-  z-index:5;
-}
-.tab{
-  flex:1;display:flex;align-items:center;justify-content:center;text-align:center;
-  font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-  text-decoration:none;color:var(--t3);background:var(--offwhite);
-  border:1px solid var(--line);border-right:none;border-radius:8px 0 0 8px;padding:2px 4px;
-  box-shadow:-2px 2px 6px rgba(0,0,0,.05);
-}
-.tab:hover{background:#F3E3DC}
-.tab.on{background:var(--t2);color:#fff;border-color:var(--t2)}
+    .tab-item:hover {
+      color: #FFFFFF;
+      background: linear-gradient(180deg, #444 0%, #282828 100%);
+    }
 
-/* ---------- PRINT ---------- */
-@page{size:A4 landscape;margin:0}
-@media print{
-  html,body{background:#fff;height:auto}
-  .toolbar,.tabs{display:none!important}
-  body{display:block}
-  .book{width:297mm;height:210mm;aspect-ratio:auto;box-shadow:none;border-radius:0}
-  .page{padding:12mm 16mm 12mm 22mm;overflow:hidden}
-  .cover .frame{inset:8mm}
-  .card,.cal a,.idx a,.sched,.mini{break-inside:avoid}
-}
+    /* Active Tab Style */
+    .tab-item.active {
+      background: linear-gradient(180deg, var(--terracotta) 0%, var(--terracotta-dark) 100%);
+      color: #FFFFFF;
+      transform: translateX(-6px);
+      box-shadow: 
+        inset 0 1px 1px rgba(255, 255, 255, 0.25),
+        -3px 3px 10px rgba(200, 109, 81, 0.4);
+    }
 
-@media (max-width:760px){
-  .page{padding:20px 60px 18px 40px}
-  .g2,.g3,.g4{grid-template-columns:1fr}
-  .idx{grid-template-columns:1fr}
-  .tab{font-size:7px}
-  h1{font-size:24px}
-}
-</style>
+    /* Tab Panels */
+    .tab-panel {
+      display: none;
+      height: 100%;
+    }
+
+    .tab-panel.active {
+      display: block;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Layout Grids */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+    /* Card Component */
+    .card {
+      background: var(--paper-white);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-card);
+      padding: 20px;
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 15pt;
+      font-weight: 600;
+      color: var(--terracotta);
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Blank Notepad (Pure Unlined White Space) */
+    .blank-notepad {
+      width: 100%;
+      height: 100%;
+      min-height: 180px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background-color: #FFFFFF;
+      padding: 16px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 9.5pt;
+      color: var(--ink-primary);
+      line-height: 1.6;
+      resize: none;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .blank-notepad:focus {
+      border-color: var(--terracotta);
+    }
+
+    /* Checklist Components */
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .checklist-item input[type="checkbox"] {
+      appearance: none;
+      width: 17px;
+      height: 17px;
+      border: 1.5px solid var(--terracotta);
+      border-radius: 4px;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s;
+    }
+
+    .checklist-item input[type="checkbox"]:checked {
+      background-color: var(--terracotta);
+    }
+
+    .checklist-item input[type="checkbox"]:checked::after {
+      content: '✓';
+      position: absolute;
+      color: white;
+      font-size: 11px;
+      top: -2px;
+      left: 3px;
+    }
+
+    .checklist-item input[type="text"] {
+      flex: 1;
+      border: none;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 9pt;
+      padding: 3px 0;
+      outline: none;
+      color: var(--ink-primary);
+    }
+
+    .checklist-item input[type="text"]:focus {
+      border-bottom-color: var(--terracotta);
+    }
+
+    /* Month Selector Buttons */
+    .month-bar {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      margin-bottom: 16px;
+    }
+
+    .month-btn {
+      border: 1px solid var(--border-color);
+      background: var(--paper-white);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 8.5pt;
+      font-weight: 600;
+      color: var(--ink-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .month-btn.active, .month-btn:hover {
+      background: var(--terracotta);
+      color: #FFFFFF;
+      border-color: var(--terracotta);
+    }
+
+    /* Calendar Grid */
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+    }
+
+    .cal-head {
+      text-align: center;
+      font-size: 8pt;
+      font-weight: 700;
+      color: var(--terracotta);
+      padding: 4px 0;
+    }
+
+    .cal-cell {
+      background: var(--paper-white);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      height: 52px;
+      padding: 6px;
+      font-size: 8pt;
+      color: var(--ink-primary);
+    }
+
+    /* Bookshelf Grid */
+    .book-card {
+      background: var(--terracotta-soft);
+      border: 1px dashed var(--terracotta);
+      border-radius: 10px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .book-card input {
+      border: none;
+      background: transparent;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 8.5pt;
+      outline: none;
+    }
+  </style>
 </head>
 <body>
 
-<div class="toolbar no-print">
-  <button id="prev">&larr; Prev</button>
-  <span class="pg" id="pgLabel">Page 1 of 560</span>
-  <input id="jump" type="number" min="1" max="560" placeholder="Go to page" aria-label="Go to page">
-  <button id="next">Next &rarr;</button>
-  <button id="printBtn">Print / Save PDF</button>
-</div>
+  <div class="planner-shell">
+    
+    <!-- Left Accent Line -->
+    <div class="planner-spine"></div>
 
-<div class="book" id="book">
-  <main class="stage" id="stage"></main>
-  <nav class="tabs" id="tabs" aria-label="Planner sections"></nav>
-</div>
-
-<script>
-/* =====================================================
-   CONSTANTS
-   ===================================================== */
-const TOTAL = 560;
-const MN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-const DN = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-const DS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-const HABITS = ['Reading','Movement','Sleep 7+ hrs','Journaling','Meditation','Learning','Connection','Gratitude'];
-const BUDGET = ['Housing','Utilities','Groceries','Transport','Health','Savings','Entertainment','Other'];
-const OBS = {
-  '1-1':"New Year's Day", '2-14':"Valentine's Day", '3-8':"International Women's Day",
-  '3-20':'International Day of Happiness', '4-22':'Earth Day', '6-5':'World Environment Day',
-  '10-10':'World Mental Health Day', '12-10':'Human Rights Day'
-};
-const SECTIONS = [
-  {key:'index',   label:'Index',   from:2,   to:2,   tab:'index'},
-  {key:'year',    label:'Year',    from:3,   to:4,   tab:'year'},
-  {key:'reading', label:'Reading', from:5,   to:20,  tab:'reading'},
-  {key:'monthly', label:'Month',   from:21,  to:44,  tab:'monthly'},
-  {key:'weekly',  label:'Week',    from:45,  to:148, tab:'weekly'},
-  {key:'daily',   label:'Daily',   from:149, to:513, tab:'daily'},
-  {key:'finance', label:'Finance', from:514, to:530, tab:'finance'},
-  {key:'notes',   label:'Notes',   from:531, to:560, tab:'notes'}
-];
-
-/* =====================================================
-   STORAGE (kept in this browser only)
-   ===================================================== */
-let store = {};
-try { store = JSON.parse(localStorage.getItem('planner2027-ultimate')) || {}; } catch(e){ store = {}; }
-function persist(){ try { localStorage.setItem('planner2027-ultimate', JSON.stringify(store)); } catch(e){} }
-
-/* =====================================================
-   HELPERS
-   ===================================================== */
-const pad = n => String(n).padStart(2,'0');
-const dayOf = i => new Date(2027, 0, 1 + i);           // i = 0..364
-const idxOf = d => Math.round((d - new Date(2027,0,1)) / 864e5);
-const clamp = (n,a,b) => Math.min(b, Math.max(a, n));
-const ta = (k, ph='') => `<textarea class="notepad" data-k="${k}" placeholder="${ph}"></textarea>`;
-const inp = (k, ph='') => `<input class="ln" data-k="${k}" placeholder="${ph}">`;
-const head = (eb, title) => `<div class="eyebrow">${eb}</div><h1>${title}</h1>`;
-function sectionOf(n){ return SECTIONS.find(s => n >= s.from && n <= s.to); }
-function holidayName(d){ return OBS[(d.getMonth()+1)+'-'+d.getDate()] || ''; }
-
-/* Map every page number 1..560 to its layout */
-function plan(n){
-  if(n === 1)  return {t:'cover', n};
-  if(n === 2)  return {t:'index', n};
-  if(n <= 4)   return {t:'year', i:n-3, n};
-  if(n <= 20)  return {t:'reading', i:n-5, n};
-  if(n <= 44)  { const k = n-21; return {t:'month', m:Math.floor(k/2)+1, half:k%2, n}; }
-  if(n <= 148) { const k = n-45; return {t:'week', w:Math.floor(k/2)+1, half:k%2, n}; }
-  if(n <= 513) return {t:'daily', i:n-149, n};
-  if(n <= 530) return {t:'finance', i:n-514, n};
-  return {t:'notepad', i:n-531, n};
-}
-
-/* =====================================================
-   PAGE RENDERERS
-   ===================================================== */
-const R = {};
-
-R.cover = () => `
-  <section class="page cover">
-    <div class="frame"></div>
-    <div class="eb">2027 &middot; DIGITAL PLANNER</div>
-    <h1 class="hero">Intentional<br>&amp; Reading</h1>
-    <div class="rule"></div>
-    <p>Write your own story, one intentional day at a time.</p>
-    <a class="btn" href="#p/2">Enter Planner</a>
-  </section>`;
-
-R.index = () => {
-  const links = SECTIONS.map(s => `
-    <a href="#p/${s.from}">${s.label}<small>Pages ${s.from}&ndash;${s.to}</small></a>`).join('');
-  return `
-  <section class="page">
-    ${head('Master Index', 'Navigation Dashboard')}
-    <p class="muted" style="margin:0 0 6px">Click any section to jump instantly. Use the tabs on the right edge at any time. Your entries save automatically in this browser.</p>
-    <div class="idx">${links}</div>
-    <div style="height:14px"></div>
-    <div class="grid g2">
-      <div class="card">
-        <h3>Week starts on</h3>
-        <select class="ln" data-k="weekStart" style="width:auto">
-          <option value="sun">Sunday</option><option value="mon">Monday</option>
-        </select>
+    <!-- Main Content View -->
+    <div class="planner-content">
+      
+      <!-- Top Header -->
+      <div class="planner-header">
+        <div class="header-title">
+          <h1 id="view-title">Master Index</h1>
+          <p id="view-subtitle">Intentional Living & Mindful Planning</p>
+        </div>
+        <span class="year-tag">2027</span>
       </div>
-      <div class="card">
-        <h3>Getting started</h3>
-        <p class="muted" style="margin:0;line-height:1.6">Open Yearly to set goals, use Monthly for planning, Weekly for the big picture, and Daily for time blocking. Print or save any page with the button above.</p>
+
+      <!-- VIEW 1: HOME / INDEX -->
+      <div class="tab-panel active" id="panel-home">
+        <div class="grid-2">
+          <div class="card">
+            <h3>Vision & Core Focus</h3>
+            <div class="checklist-item"><input type="checkbox" checked><input type="text" value="Read 24 books in Reading Journal"></div>
+            <div class="checklist-item"><input type="checkbox" checked><input type="text" value="Daily mindfulness & unlined journaling"></div>
+            <div class="checklist-item"><input type="checkbox"><input type="text" value="Achieve monthly savings & investments"></div>
+            <div class="checklist-item"><input type="checkbox"><input type="text" value="Gunung Ciremai hiking adventure"></div>
+          </div>
+          <div class="card">
+            <h3>Quick Ideas Notepad</h3>
+            <textarea class="blank-notepad" placeholder="Write quick thoughts or inspirations here (blank paper)..."></textarea>
+          </div>
+        </div>
       </div>
+
+      <!-- VIEW 2: YEAR AT A GLANCE -->
+      <div class="tab-panel" id="panel-year">
+        <div class="card">
+          <h3>2027 Annual Goals & Affirmation</h3>
+          <textarea class="blank-notepad" style="height: 120px;" placeholder="Write your annual intention, mantra, or word of the year..."></textarea>
+        </div>
+        <div class="card">
+          <h3>Key Milestones</h3>
+          <div class="grid-3">
+            <div><b style="font-size: 9pt; color: var(--terracotta);">Q1 Goals</b><div class="checklist-item"><input type="checkbox"><input type="text" placeholder="Goal 1..."></div></div>
+            <div><b style="font-size: 9pt; color: var(--terracotta);">Q2 Goals</b><div class="checklist-item"><input type="checkbox"><input type="text" placeholder="Goal 2..."></div></div>
+            <div><b style="font-size: 9pt; color: var(--terracotta);">Q3 Goals</b><div class="checklist-item"><input type="checkbox"><input type="text" placeholder="Goal 3..."></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 3: MONTHLY SPREAD (JAN - DEC) -->
+      <div class="tab-panel" id="panel-month">
+        <div class="month-bar">
+          <button class="month-btn active">Jan</button>
+          <button class="month-btn">Feb</button>
+          <button class="month-btn">Mar</button>
+          <button class="month-btn">Apr</button>
+          <button class="month-btn">May</button>
+          <button class="month-btn">Jun</button>
+          <button class="month-btn">Jul</button>
+          <button class="month-btn">Aug</button>
+          <button class="month-btn">Sep</button>
+          <button class="month-btn">Oct</button>
+          <button class="month-btn">Nov</button>
+          <button class="month-btn">Dec</button>
+        </div>
+        <div class="grid-2" style="grid-template-columns: 1.8fr 1fr;">
+          <div class="card">
+            <div class="calendar-grid">
+              <div class="cal-head">MON</div><div class="cal-head">TUE</div><div class="cal-head">WED</div>
+              <div class="cal-head">THU</div><div class="cal-head">FRI</div><div class="cal-head">SAT</div><div class="cal-head">SUN</div>
+              
+              <div class="cal-cell">1</div><div class="cal-cell">2</div><div class="cal-cell">3</div><div class="cal-cell">4</div>
+              <div class="cal-cell">5</div><div class="cal-cell">6</div><div class="cal-cell">7</div><div class="cal-cell">8</div>
+              <div class="cal-cell">9</div><div class="cal-cell">10</div><div class="cal-cell">11</div><div class="cal-cell">12</div>
+              <div class="cal-cell">13</div><div class="cal-cell">14</div><div class="cal-cell">15</div><div class="cal-cell">16</div>
+              <div class="cal-cell">17</div><div class="cal-cell">18</div><div class="cal-cell">19</div><div class="cal-cell">20</div>
+              <div class="cal-cell">21</div><div class="cal-cell">22</div><div class="cal-cell">23</div><div class="cal-cell">24</div>
+              <div class="cal-cell">25</div><div class="cal-cell">26</div><div class="cal-cell">27</div><div class="cal-cell">28</div>
+            </div>
+          </div>
+          <div>
+            <div class="card">
+              <h3>Monthly Focus</h3>
+              <div class="checklist-item"><input type="checkbox"><input type="text" placeholder="Key priority 1..."></div>
+              <div class="checklist-item"><input type="checkbox"><input type="text" placeholder="Key priority 2..."></div>
+            </div>
+            <div class="card">
+              <h3>Monthly Blank Reflection</h3>
+              <textarea class="blank-notepad" style="height: 100px;" placeholder="Reflections for the month..."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 4: DAILY PLANNER -->
+      <div class="tab-panel" id="panel-daily">
+        <div class="grid-2">
+          <div class="card">
+            <h3>Time Schedule</h3>
+            <div class="checklist-item"><span style="font-size:8pt; width:45px; color:var(--ink-muted);">07:00</span><input type="text" placeholder="Morning Routine & Coffee"></div>
+            <div class="checklist-item"><span style="font-size:8pt; width:45px; color:var(--ink-muted);">09:00</span><input type="text" placeholder="Deep Work & Coding"></div>
+            <div class="checklist-item"><span style="font-size:8pt; width:45px; color:var(--ink-muted);">12:00</span><input type="text" placeholder="Lunch & Reading Session"></div>
+            <div class="checklist-item"><span style="font-size:8pt; width:45px; color:var(--ink-muted);">15:00</span><input type="text" placeholder="Web Projects & Design"></div>
+            <div class="checklist-item"><span style="font-size:8pt; width:45px; color:var(--ink-muted);">18:00</span><input type="text" placeholder="Exercise / Outdoor Walk"></div>
+            <div class="checklist-item"><span style="font-size:8pt; width:45px; color:var(--ink-muted);">21:00</span><input type="text" placeholder="Unwind & Journaling"></div>
+          </div>
+          <div class="card">
+            <h3>Daily Unlined Notepad</h3>
+            <textarea class="blank-notepad" style="height: 250px;" placeholder="Clean blank paper space for freewriting, daily thoughts, or sketches..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 5: READING JOURNAL -->
+      <div class="tab-panel" id="panel-books">
+        <div class="card" style="margin-bottom: 16px;">
+          <h3>2027 Reading Goal <span>12 / 24 Books Read</span></h3>
+          <div style="background: var(--border-color); height: 8px; border-radius: 4px; overflow: hidden; margin-top: 6px;">
+            <div style="background: var(--terracotta); width: 50%; height: 100%;"></div>
+          </div>
+        </div>
+        <div class="grid-3">
+          <div class="book-card">
+            <input type="text" value="The Midnight Library" style="font-weight:700;">
+            <input type="text" value="Matt Haig" style="color:var(--ink-muted);">
+            <span style="color:var(--terracotta); font-size:10pt;">★★★★★</span>
+            <input type="text" placeholder="Quotes / Notes...">
+          </div>
+          <div class="book-card">
+            <input type="text" value="Atomic Habits" style="font-weight:700;">
+            <input type="text" value="James Clear" style="color:var(--ink-muted);">
+            <span style="color:var(--terracotta); font-size:10pt;">★★★★★</span>
+            <input type="text" placeholder="Quotes / Notes...">
+          </div>
+          <div class="book-card">
+            <input type="text" placeholder="Book Title..." style="font-weight:700;">
+            <input type="text" placeholder="Author..." style="color:var(--ink-muted);">
+            <span style="color:var(--terracotta); font-size:10pt;">☆☆☆☆☆</span>
+            <input type="text" placeholder="Quotes / Notes...">
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 6: FINANCE -->
+      <div class="tab-panel" id="panel-finance">
+        <div class="grid-3" style="margin-bottom: 16px;">
+          <div class="card"><h3>Total Income</h3><h2 style="color:var(--terracotta); font-family:'Playfair Display'; margin-top:4px;">$ 4,500.00</h2></div>
+          <div class="card"><h3>Total Expenses</h3><h2 style="color:var(--ink-muted); font-family:'Playfair Display'; margin-top:4px;">$ 2,100.00</h2></div>
+          <div class="card"><h3>Net Savings</h3><h2 style="color:var(--terracotta-dark); font-family:'Playfair Display'; margin-top:4px;">$ 2,400.00</h2></div>
+        </div>
+        <div class="card">
+          <h3>Savings Goals & Budget</h3>
+          <div class="checklist-item"><input type="checkbox" checked><input type="text" value="Emergency Fund — $500"></div>
+          <div class="checklist-item"><input type="checkbox" checked><input type="text" value="Book Purchase Budget — $100"></div>
+          <div class="checklist-item"><input type="checkbox"><input type="text" value="Travel & Hiking Fund — $300"></div>
+        </div>
+      </div>
+
+      <!-- VIEW 7: HABITS -->
+      <div class="tab-panel" id="panel-habits">
+        <div class="card">
+          <h3>Habit Matrix</h3>
+          <div class="checklist-item">
+            <input type="text" value="8 Hours Sleep" style="width:140px; flex:none;">
+            <div style="display:flex; gap:14px; font-size:8.5pt; color:var(--ink-muted);">
+              <label>M <input type="checkbox" checked></label>
+              <label>T <input type="checkbox" checked></label>
+              <label>W <input type="checkbox" checked></label>
+              <label>T <input type="checkbox"></label>
+              <label>F <input type="checkbox" checked></label>
+              <label>S <input type="checkbox" checked></label>
+              <label>S <input type="checkbox" checked></label>
+            </div>
+          </div>
+          <div class="checklist-item">
+            <input type="text" value="30 Mins Reading" style="width:140px; flex:none;">
+            <div style="display:flex; gap:14px; font-size:8.5pt; color:var(--ink-muted);">
+              <label>M <input type="checkbox" checked></label>
+              <label>T <input type="checkbox" checked></label>
+              <label>W <input type="checkbox" checked></label>
+              <label>T <input type="checkbox" checked></label>
+              <label>F <input type="checkbox" checked></label>
+              <label>S <input type="checkbox"></label>
+              <label>S <input type="checkbox" checked></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 8: NOTES -->
+      <div class="tab-panel" id="panel-notes">
+        <div class="card">
+          <h3>Unlined Blank Paper Workspace</h3>
+          <textarea class="blank-notepad" style="height: 360px;" placeholder="Enjoy this pure, clean, unlined space for unlimited brainstorms, journaling, or sketches..."></textarea>
+        </div>
+      </div>
+
     </div>
-  </section>`;
-};
 
-R.year = (p) => {
-  if(p.i === 0){
-    const minis = MN.map((name,mi) => {
-      const first = new Date(2027, mi, 1).getDay();
-      const days = new Date(2027, mi+1, 0).getDate();
-      let g = DS.map(d => `<span class="h">${d[0]}</span>`).join('') + '<span></span>'.repeat(first);
-      for(let d=1; d<=days; d++) g += `<span>${d}</span>`;
-      return `<div class="mini"><a href="#p/${21 + mi*2}">${name}</a><div class="mg">${g}</div></div>`;
-    }).join('');
-    return `
-    <section class="page">
-      ${head('Yearly Overview', 'Year at a Glance &middot; 2027')}
-      <div class="grid g4" style="grid-template-columns:repeat(4,1fr);gap:8px">${minis}</div>
-    </section>`;
-  }
-  const goals = [1,2,3,4,5].map(i => `<div style="margin:4px 0">${inp('goal'+i, 'Annual goal '+i)}</div>`).join('');
-  const qs = ['Q1','Q2','Q3','Q4'].map((q,i) => `<div style="margin:4px 0">${inp('q'+i, q+' milestone')}</div>`).join('');
-  return `
-  <section class="page">
-    ${head('Yearly Overview', 'Vision &amp; Annual Goals')}
-    <div class="grid g2" style="height:calc(100% - 80px)">
-      <div class="flex">
-        <div class="card"><h3>Vision Board</h3>${ta('vision','Describe the life you are building...')}</div>
-      </div>
-      <div class="flex">
-        <div class="card"><h3>Top 5 Annual Goals</h3>${goals}</div>
-        <div class="card"><h3>Quarterly Milestones</h3>${qs}</div>
-      </div>
+    <!-- Right 3D Vertical Tab Sidebar -->
+    <div class="tab-sidebar">
+      <div class="tab-item active" onclick="switchView('home', 'Master Index', 'Intentional Living & Mindful Planning')">Home</div>
+      <div class="tab-item" onclick="switchView('year', 'Annual Overview', 'Year at a Glance & Major Goals')">Year</div>
+      <div class="tab-item" onclick="switchView('month', 'Monthly Spread', 'Calendar, Key Priorities & Focus')">Jan</div>
+      <div class="tab-item" onclick="switchView('month', 'Monthly Spread', 'Calendar, Key Priorities & Focus')">Feb</div>
+      <div class="tab-item" onclick="switchView('month', 'Monthly Spread', 'Calendar, Key Priorities & Focus')">Mar</div>
+      <div class="tab-item" onclick="switchView('month', 'Monthly Spread', 'Calendar, Key Priorities & Focus')">Apr</div>
+      <div class="tab-item" onclick="switchView('month', 'Monthly Spread', 'Calendar, Key Priorities & Focus')">May</div>
+      <div class="tab-item" onclick="switchView('month', 'Monthly Spread', 'Calendar, Key Priorities & Focus')">Jun</div>
+      <div class="tab-item" onclick="switchView('month', 'Monthly Spread', 'Calendar, Key Priorities & Focus')">Jul</div>
+      <div class="tab-item" onclick="switchView('month', 'Monthly Spread', 'Calendar, Key Priorities & Focus')">Aug</div>
+      <div class="tab-item" onclick="switchView('month', 'Monthly Spread', 'Calendar, Key Priorities & Focus')">Sep</div>
+      <div class="tab-item" onclick="switchView('month', 'Monthly Spread', 'Calendar, Key Priorities & Focus')">Oct</div>
+      <div class="tab-item" onclick="switchView('month', 'Monthly Spread', 'Calendar, Key Priorities & Focus')">Nov</div>
+      <div class="tab-item" onclick="switchView('month', 'Monthly Spread', 'Calendar, Key Priorities & Focus')">Dec</div>
+      <div class="tab-item" onclick="switchView('daily', 'Daily Schedule', 'Time Blocking & Unlined Notepad')">Daily</div>
+      <div class="tab-item" onclick="switchView('books', 'Reading Journal', 'Library Shelf & Reading Tracker')">Books</div>
+      <div class="tab-item" onclick="switchView('finance', 'Finance Tracker', 'Income, Expenses & Savings Goals')">Finance</div>
+      <div class="tab-item" onclick="switchView('habits', 'Habits & Wellness', 'Weekly Habit Matrix')">Habits</div>
+      <div class="tab-item" onclick="switchView('notes', 'Blank Notepad', 'Unlined Freewriting Space')">Notes</div>
     </div>
-  </section>`;
-};
 
-R.reading = (p) => {
-  const i = p.i;
-  if(i < 4){
-    const rows = Array.from({length:12}, (_,r) => `
-      <tr><td>${inp(`shelf${p.n}-${r}-t`,'Title')}</td><td>${inp(`shelf${p.n}-${r}-a`,'Author')}</td><td>${inp(`shelf${p.n}-${r}-g`,'Genre')}</td></tr>`).join('');
-    return `
-    <section class="page">
-      ${head('Reading Journal &middot; Library Shelf', 'Library Shelf')}
-      <div class="card" style="height:calc(100% - 80px);overflow:auto"><table class="t">
-        <tr><th>Title</th><th>Author</th><th>Genre</th></tr>${rows}</table></div>
-    </section>`;
-  }
-  if(i < 10){
-    return `
-    <section class="page">
-      ${head('Reading Journal &middot; Book Review', 'Book Review')}
-      <div class="grid g2" style="margin-bottom:10px">
-        <div class="card">${inp(`rv${p.n}-title`,'Book title')}${inp(`rv${p.n}-author`,'Author')}${inp(`rv${p.n}-date`,'Date finished')}</div>
-        <div class="card"><h3>Rating</h3>${inp(`rv${p.n}-rating`,'Stars 1-5')}</div>
-      </div>
-      <div style="height:calc(100% - 170px)">${ta(`rv${p.n}-review`,'Your review, favorite quotes, and takeaways...')}</div>
-    </section>`;
-  }
-  if(i < 13){
-    const rows = Array.from({length:10}, (_,r) => `
-      <tr><td>${r+1}</td><td>${inp(`se${p.n}-${r}-b`,'Book')}</td><td>${inp(`se${p.n}-${r}-s`,'Status')}</td></tr>`).join('');
-    return `
-    <section class="page">
-      ${head('Reading Journal &middot; Series Tracker', 'Series Tracker')}
-      ${inp(`se${p.n}-name`,'Series name')}
-      <div class="card" style="margin-top:10px;height:calc(100% - 130px);overflow:auto"><table class="t">
-        <tr><th>#</th><th>Book</th><th>Status</th></tr>${rows}</table></div>
-    </section>`;
-  }
-  const boxes = Array.from({length:52}, (_,w) =>
-    `<button class="box ${store['rc'+(w+1)]?'on':''}" data-t="rc${w+1}">${w+1}</button>`).join('');
-  return `
-  <section class="page">
-    ${head('Reading Journal &middot; Challenge', 'Reading Challenge 2027')}
-    <div class="grid g2" style="margin-bottom:10px">
-      <div class="card"><h3>Goal</h3>${inp('rc-goal','Books to read in 2027')}</div>
-      <div class="card"><h3>Books finished</h3>${inp('rc-done','Number finished')}</div>
-    </div>
-    <div class="card"><h3>Weekly progress &middot; tap a week when you finish a reading session</h3>
-      <div class="chk" style="grid-template-columns:repeat(13,1fr)">${boxes}</div>
-    </div>
-  </section>`;
-};
+  </div>
 
-R.month = (p) => {
-  const m = p.m;
-  if(p.half === 0){
-    const first = new Date(2027, m-1, 1).getDay();
-    const days = new Date(2027, m, 0).getDate();
-    let cells = DS.map(d => `<div class="dh">${d}</div>`).join('');
-    cells += '<div class="blank"></div>'.repeat(first);
-    for(let d=1; d<=days; d++){
-      const di = idxOf(new Date(2027,m-1,d));
-      const h = holidayName(new Date(2027,m-1,d));
-      cells += `<a class="${h?'hol':''}" href="#p/${149+di}">${d}${h?`<small>${h}</small>`:''}</a>`;
+  <script>
+    function switchView(panelId, title, subtitle) {
+      // Remove active class from all panels and tabs
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+
+      // Show selected panel
+      const targetPanel = document.getElementById('panel-' + panelId);
+      if (targetPanel) {
+        targetPanel.classList.add('active');
+      }
+
+      // Update Header Text
+      document.getElementById('view-title').textContent = title;
+      document.getElementById('view-subtitle').textContent = subtitle;
+
+      // Highlight target tab
+      event.currentTarget.classList.add('active');
     }
-    return `
-    <section class="page">
-      ${head('Monthly View &middot; 2027', MN[m-1])}
-      <div class="cal">${cells}</div>
-    </section>`;
-  }
-  return `
-  <section class="page">
-    ${head('Monthly View &middot; 2027', MN[m-1] + ' &middot; Planning')}
-    <div class="grid g2" style="height:calc(100% - 80px)">
-      <div class="flex">
-        <div class="card" style="flex:1;display:flex;flex-direction:column"><h3>Monthly Goals</h3>${ta(`mg${m}`,'Top goals this month...')}</div>
-        <div class="card"><h3>Key Dates</h3>${inp(`kd${m}-1`,'Date and event')}${inp(`kd${m}-2`,'Date and event')}</div>
-      </div>
-      <div class="flex">
-        <div class="card" style="flex:1;display:flex;flex-direction:column"><h3>Monthly Review</h3>${ta(`mr${m}`,'Wins, lessons, and changes for next month...')}</div>
-      </div>
-    </div>
-  </section>`;
-};
-
-R.week = (p) => {
-  const start = (p.w - 1) * 7;
-  const count = p.w === 52 ? 8 : 7;
-  const label = `${MN[dayOf(start).getMonth()].slice(0,3)} ${dayOf(start).getDate()} &ndash; ${MN[dayOf(start+count-1).getMonth()].slice(0,3)} ${dayOf(start+count-1).getDate()}`;
-  if(p.half === 0){
-    const cards = Array.from({length:count}, (_,j) => {
-      const d = dayOf(start + j);
-      const h = holidayName(d);
-      return `<div class="card flex" style="gap:6px;padding:8px">
-        <a href="#p/${149+start+j}" style="text-decoration:none;color:var(--ink);font-family:'Playfair Display',serif;font-weight:600;font-size:14px">${DS[d.getDay()]} ${d.getDate()}</a>
-        ${h?`<small style="color:var(--t2);font-size:9px">${h}</small>`:''}
-        <div class="fill">${ta(`w${p.w}-d${j}`,'Plans...')}</div>
-      </div>`;
-    }).join('');
-    return `
-    <section class="page">
-      ${head('Weekly View &middot; Week '+p.w, label)}
-      <div class="grid" style="grid-template-columns:repeat(${count},1fr);gap:8px;height:calc(100% - 80px)">${cards}</div>
-    </section>`;
-  }
-  return `
-  <section class="page">
-    ${head('Weekly View &middot; Week '+p.w, 'Priorities &amp; Reflection')}
-    <div class="grid g2" style="height:calc(100% - 80px)">
-      <div class="card" style="display:flex;flex-direction:column"><h3>Top Priorities</h3>${inp(`w${p.w}-p1`,'1.')}${inp(`w${p.w}-p2`,'2.')}${inp(`w${p.w}-p3`,'3.')}
-        <div style="margin-top:8px;flex:1">${ta(`w${p.w}-notes`,'Notes for this week...')}</div></div>
-      <div class="card" style="display:flex;flex-direction:column"><h3>Weekly Reflection</h3>${ta(`w${p.w}-ref`,'What worked, what did not, and what I am grateful for...')}</div>
-    </div>
-  </section>`;
-};
-
-R.daily = (p) => {
-  const d = dayOf(p.i);
-  const h = holidayName(d);
-  const label = `${DN[d.getDay()]}, ${MN[d.getMonth()]} ${d.getDate()}, 2027`;
-  const hours = Array.from({length:17}, (_,j) => {
-    const hr = 6 + j;
-    return `<div class="hrow"><div class="t">${pad(hr)}:00</div><input data-k="d${p.i}-h${hr}" aria-label="${hr}:00"></div>`;
-  }).join('');
-  return `
-  <section class="page">
-    ${head('Daily View' + (h?' &middot; '+h:''), label)}
-    <div class="grid" style="grid-template-columns:1.1fr 1fr;gap:14px;height:calc(100% - 80px)">
-      <div class="sched">${hours}</div>
-      <div class="flex">
-        <div class="card"><h3>Top 3 Priorities</h3>${inp(`d${p.i}-p1`,'1.')}${inp(`d${p.i}-p2`,'2.')}${inp(`d${p.i}-p3`,'3.')}</div>
-        <div class="fill" style="display:flex;flex-direction:column">${ta(`d${p.i}-notes`,'')}</div>
-      </div>
-    </div>
-  </section>`;
-};
-
-R.finance = (p) => {
-  const i = p.i;
-  if(i === 0){
-    return `
-    <section class="page">
-      ${head('Finance', 'Financial Overview 2027')}
-      <div class="grid g2">
-        <div class="card"><h3>Annual Income Goal</h3>${inp('fin-income-goal','Amount')}</div>
-        <div class="card"><h3>Annual Savings Goal</h3>${inp('fin-save-goal','Amount')}</div>
-      </div>
-      <div style="height:14px"></div>
-      <div class="card"><h3>Notes</h3>${ta('fin-overview-notes','Money goals, reviews, and reminders...')}</div>
-    </section>`;
-  }
-  if(i <= 12){
-    const m = i;
-    const rows = BUDGET.map((c,j) => `
-      <tr><td>${c}</td><td><input type="number" min="0" step="0.01" class="ln bp" data-k="b${m}-p${j}" placeholder="0.00"></td><td><input type="number" min="0" step="0.01" class="ln ba" data-k="b${m}-a${j}" placeholder="0.00"></td></tr>`).join('');
-    return `
-    <section class="page">
-      ${head('Finance &middot; Budget', MN[m-1] + ' Budget')}
-      <div class="grid g2" style="grid-template-columns:1.3fr 1fr">
-        <div class="card"><table class="t">
-          <tr><th>Category</th><th>Planned (USD)</th><th>Actual (USD)</th></tr>${rows}
-          <tr><td><b>Total</b></td><td><b class="tot-p" data-m="${m}">0.00</b></td><td><b class="tot-a" data-m="${m}">0.00</b></td></tr>
-        </table></div>
-        <div class="card" style="display:flex;flex-direction:column"><h3>Notes</h3>${ta(`b${m}-notes`,'Spending notes...')}</div>
-      </div>
-    </section>`;
-  }
-  if(i === 13 || i === 14){
-    const rows = Array.from({length:4}, (_,r) => `
-      <tr><td>${inp(`sv${p.n}-${r}-n`,'Goal')}</td><td>${inp(`sv${p.n}-${r}-t`,'Target')}</td><td>${inp(`sv${p.n}-${r}-s`,'Saved')}</td></tr>`).join('');
-    return `
-    <section class="page">
-      ${head('Finance &middot; Savings', 'Savings Goals')}
-      <div class="card"><table class="t"><tr><th>Goal</th><th>Target</th><th>Saved</th></tr>${rows}</table></div>
-    </section>`;
-  }
-  if(i === 15){
-    const rows = Array.from({length:6}, (_,r) => `
-      <tr><td>${inp(`dt${r}-n`,'Debt')}</td><td>${inp(`dt${r}-b`,'Balance')}</td><td>${inp(`dt${r}-r`,'Rate %')}</td><td>${inp(`dt${r}-m`,'Payment')}</td></tr>`).join('');
-    return `
-    <section class="page">
-      ${head('Finance &middot; Debt', 'Debt Payoff Tracker')}
-      <div class="card"><table class="t"><tr><th>Debt</th><th>Balance</th><th>Rate</th><th>Monthly</th></tr>${rows}</table></div>
-    </section>`;
-  }
-  const cols = Array.from({length:31}, (_,d) => `<div class="hd">${d+1}</div>`).join('');
-  const hrows = HABITS.map((h,hi) => {
-    const boxes = Array.from({length:31}, (_,d) =>
-      `<button class="box ${store[`hm-${hi}-${d+1}`]?'on':''}" data-t="hm-${hi}-${d+1}" aria-label="${h} day ${d+1}"></button>`).join('');
-    return `<div class="hn">${h}</div>${boxes}`;
-  }).join('');
-  return `
-  <section class="page">
-    ${head('Finance &amp; Habits', 'Habit Matrix &middot; Day Columns')}
-    <p class="muted" style="margin:0 0 8px">Tap a box to mark a day done. Rename habits by editing the field below.</p>
-    <div class="card" style="overflow:auto">
-      <div class="habits" style="grid-template-columns:150px repeat(31,1fr)">
-        <div></div>${cols}${hrows}
-      </div>
-    </div>
-  </section>`;
-};
-
-R.notepad = (p) => `
-  <section class="page">
-    ${head('Custom Notepad', 'Notepad ' + (p.i + 1))}
-    <div style="height:calc(100% - 80px)">${ta(`np${p.n}`,'')}</div>
-  </section>`;
-
-/* =====================================================
-   ROUTING & RENDERING
-   ===================================================== */
-const stage = document.getElementById('stage');
-const tabsEl = document.getElementById('tabs');
-let current = 1;
-
-function currentFromHash(){
-  const m = location.hash.match(/#p\/(\d+)/);
-  return clamp(m ? parseInt(m[1],10) : 1, 1, TOTAL);
-}
-
-function renderTabs(n){
-  const sec = sectionOf(n);
-  const active = sec ? sec.key : '';
-  tabsEl.innerHTML = SECTIONS.map(s =>
-    `<a class="tab ${s.key===active?'on':''}" href="#p/${s.from}">${s.label}</a>`
-  ).join('');
-}
-
-function restoreFields(){
-  document.querySelectorAll('[data-k]').forEach(el => {
-    const v = store[el.dataset.k];
-    if(v !== undefined && el.tagName !== 'BUTTON') el.value = v;
-  });
-  recalcBudgets();
-}
-
-function show(n){
-  current = clamp(n, 1, TOTAL);
-  const p = plan(current);
-  stage.innerHTML = `<div class="book-page" style="position:absolute;inset:0">${R[p.t](p)}</div>`;
-  const page = stage.querySelector('.page');
-  if(page) page.scrollTop = 0;
-  restoreFields();
-  renderTabs(current);
-  document.getElementById('pgLabel').textContent = `Page ${current} of ${TOTAL}`;
-  document.getElementById('jump').value = '';
-  persist();
-}
-
-function route(){ show(currentFromHash()); }
-
-/* =====================================================
-   BUDGET TOTALS
-   ===================================================== */
-function recalcBudgets(){
-  document.querySelectorAll('.tot-p').forEach(el => {
-    const m = el.dataset.m;
-    const sum = [...document.querySelectorAll(`[data-k^="b${m}-p"]`)].reduce((s,x)=>s+(parseFloat(x.value)||0),0);
-    el.textContent = sum.toFixed(2);
-  });
-  document.querySelectorAll('.tot-a').forEach(el => {
-    const m = el.dataset.m;
-    const sum = [...document.querySelectorAll(`[data-k^="b${m}-a"]`)].reduce((s,x)=>s+(parseFloat(x.value)||0),0);
-    el.textContent = sum.toFixed(2);
-  });
-}
-
-/* =====================================================
-   EVENTS
-   ===================================================== */
-document.addEventListener('input', e => {
-  const t = e.target;
-  if(t.dataset && t.dataset.k){
-    store[t.dataset.k] = t.value;
-    if(t.classList.contains('bp') || t.classList.contains('ba')) recalcBudgets();
-    persist();
-  }
-});
-
-document.addEventListener('change', e => {
-  const t = e.target;
-  if(t.dataset && t.dataset.k){
-    store[t.dataset.k] = t.value;
-    persist();
-  }
-});
-
-document.addEventListener('click', e => {
-  const tg = e.target.closest('[data-t]');
-  if(tg){
-    const k = tg.dataset.t;
-    store[k] = !store[k];
-    tg.classList.toggle('on', !!store[k]);
-    persist();
-  }
-});
-
-document.getElementById('prev').onclick = () => { location.hash = '#p/' + Math.max(1, current-1); };
-document.getElementById('next').onclick = () => { location.hash = '#p/' + Math.min(TOTAL, current+1); };
-document.getElementById('printBtn').onclick = () => window.print();
-document.getElementById('jump').addEventListener('keydown', e => {
-  if(e.key === 'Enter'){
-    const n = clamp(parseInt(e.target.value,10) || 1, 1, TOTAL);
-    location.hash = '#p/' + n;
-  }
-});
-
-/* Arrow keys flip pages when not typing */
-document.addEventListener('keydown', e => {
-  if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)) return;
-  if(e.key === 'ArrowRight') location.hash = '#p/' + Math.min(TOTAL, current+1);
-  if(e.key === 'ArrowLeft')  location.hash = '#p/' + Math.max(1, current-1);
-});
-
-/* Swipe to flip pages on tablet */
-let touchX = null;
-stage.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, {passive:true});
-stage.addEventListener('touchend', e => {
-  if(touchX === null) return;
-  const dx = e.changedTouches[0].clientX - touchX;
-  if(Math.abs(dx) > 60){
-    location.hash = dx < 0 ? '#p/' + Math.min(TOTAL, current+1) : '#p/' + Math.max(1, current-1);
-  }
-  touchX = null;
-});
-
-window.addEventListener('hashchange', route);
-if(!location.hash) location.hash = '#p/1';
-route();
-</script>
+  </script>
 </body>
 </html>
