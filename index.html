@@ -74,7 +74,7 @@ function page(id,section,title,body,cls=''){
 function linesCard(title='Notes',height='') { return `<div class="card" style="${height}"><h3>${title}</h3><textarea class="lines"></textarea></div>`; }
 function checklist(title,items=6){
  let s=`<div class="card"><h3>${title}</h3><div class="checklist">`;
- for(let i=1;i<=items;i++) s+=`<div><span class="check"></span><input placeholder="Write here..."></div>`;
+ for(let i=1;i<=items;i++) s+=`<div><span class="check"></span><input placeholder=""></div>`;
  return s+'</div></div>';
 }
 function monthlyCalendar(m){
