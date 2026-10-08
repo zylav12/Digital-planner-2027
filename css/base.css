@@ -296,3 +296,157 @@ a {
   letter-spacing: 0.12em;
   color: var(--taupe);
 }
+/* ================================
+   DASHBOARD
+================================ */
+
+.dashboard {
+  min-height: 100vh;
+  padding: 48px 64px;
+  background: var(--ivory);
+  color: var(--charcoal);
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 48px;
+}
+
+.dashboard-eyebrow {
+  font-family: "DM Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 12px;
+}
+
+.dashboard-title {
+  margin: 0;
+  font-family: "DM Serif Display", serif;
+  font-size: 52px;
+  line-height: 1;
+  font-weight: 400;
+  color: var(--forest);
+}
+
+.dashboard-subtitle {
+  margin-top: 14px;
+  font-size: 15px;
+  color: var(--charcoal);
+}
+
+.dashboard-date {
+  text-align: right;
+  font-family: "DM Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--forest);
+}
+
+/* Navigation */
+
+.quick-navigation {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+
+.quick-navigation a {
+  text-decoration: none;
+  color: var(--forest);
+  border: 1px solid var(--taupe);
+  background: #fff;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  transition: 0.2s ease;
+}
+
+.quick-navigation a:hover {
+  background: var(--sage);
+  color: white;
+}
+
+/* Cards */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 18px;
+}
+
+.dashboard-card {
+  background: #fff;
+  border: 1px solid var(--beige);
+  border-radius: 18px;
+  padding: 26px;
+  min-height: 180px;
+}
+
+.dashboard-card.large {
+  grid-row: span 2;
+}
+
+.card-label {
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 16px;
+}
+
+.card-title {
+  font-family: "DM Serif Display", serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--forest);
+  margin: 0 0 10px;
+}
+
+.card-text {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--charcoal);
+}
+
+/* Top 3 */
+
+.top-three {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.top-three-item {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--beige);
+  font-size: 13px;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+  .dashboard {
+    padding: 32px 24px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .dashboard-date {
+    text-align: left;
+  }
+}
