@@ -3,1259 +3,675 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Intentional Living Planner 2027</title>
+<title>2027 Ultimate Intentional & Reading Planner</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --terra:#9E6B5D;
-  --rose:#C49A82;
-  --mauve:#B2968F;
-  --taupe:#D8C5BD;
-  --linen:#FDFBF7;
   --white:#FFFFFF;
-  --ink:#2B2523;
-  --line:#E8DDD6;
-  --holiday:#F5E4DC;
-  --observance:#FBF5F1;
+  --offwhite:#FAFAFA;
+  --t1:#C86D51;
+  --t2:#A95C43;
+  --t3:#8B4833;
+  --ink:#1A1A1A;
+  --line:#ECECEC;
+  --muted:#8A8A8A;
 }
-
 *{box-sizing:border-box}
-
 html,body{margin:0;height:100%}
-
 body{
-  background:radial-gradient(circle at 50% 30%,#F3EAE4,#E2D5CD);
-  font-family:'Plus Jakarta Sans',system-ui,-apple-system,Arial,sans-serif;
+  background:#EDEDED;
+  font-family:'Plus Jakarta Sans',Inter,Arial,sans-serif;
   color:var(--ink);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:16px;
-  -webkit-print-color-adjust:exact;
-  print-color-adjust:exact;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
 }
 
-/* ---------- BOOK & RING BINDER ---------- */
+/* ---------- TOOLBAR ---------- */
+.toolbar{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:12px;flex-wrap:wrap;
+}
+.toolbar button,.toolbar input{
+  font:inherit;font-size:13px;border:1px solid var(--t2);background:#fff;color:var(--t3);
+  border-radius:999px;padding:7px 14px;cursor:pointer;
+}
+.toolbar button:hover{background:var(--t2);color:#fff}
+.toolbar input{width:90px;text-align:center;cursor:text;border-color:#D8D8D8;color:var(--ink)}
+.toolbar .pg{font-size:13px;color:var(--muted);min-width:120px;text-align:center}
+
+/* ---------- BOOK ---------- */
 .book{
   position:relative;
-  width:min(1000px,100%);
+  width:min(1080px,96vw);
+  margin:0 auto;
   aspect-ratio:297/210;
-  background:var(--linen);
-  border-radius:6px 14px 14px 6px;
-  box-shadow:0 22px 50px rgba(43,37,35,.28), inset 0 0 0 1px rgba(0,0,0,.05);
-  overflow:visible;
+  background:var(--white);
+  box-shadow:0 12px 34px rgba(0,0,0,.14);
+  border-radius:6px;
+  overflow:hidden;
 }
-.book::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:inherit;
-  pointer-events:none;
-  background:linear-gradient(90deg,rgba(0,0,0,.10),transparent 6%,transparent 94%,rgba(0,0,0,.05));
-  z-index:1;
+.stage{position:absolute;inset:0;}
+.page{
+  position:absolute;inset:0;
+  padding:26px 84px 22px 54px;
+  background:var(--white);
+  overflow:auto;
 }
-.binder{
-  position:absolute;
-  left:0;top:0;bottom:0;
-  width:34px;
-  background:linear-gradient(90deg,#6E5750,#C9B0A6 30%,#F4EBE5 50%,#C9B0A6 70%,#6E5750);
-  box-shadow:2px 0 8px rgba(0,0,0,.2);
-  border-radius:6px 0 0 6px;
-  z-index:3;
+.eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--t2);font-weight:700;margin-bottom:2px}
+h1{
+  font-family:'Playfair Display',Georgia,serif;font-weight:600;
+  font-size:30px;letter-spacing:.04em;color:var(--t3);margin:0 0 10px;
 }
-.binder::before{
-  content:"";
-  position:absolute;
-  top:0;bottom:0;
-  left:50%;
-  width:14px;
-  transform:translateX(-50%);
-  background:radial-gradient(circle,#4A3A35 0 4px,#DCCBC2 5px 6px,transparent 7px) 0 0/14px 60px repeat-y;
+h2{font-family:'Playfair Display',Georgia,serif;font-size:18px;color:var(--t3);margin:0 0 6px;font-weight:600}
+h3{font-size:11px;text-transform:uppercase;letter-spacing:.12em;margin:0 0 6px;color:var(--ink);font-weight:700}
+.muted{color:var(--muted);font-size:12px}
+.card{background:var(--offwhite);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g7{grid-template-columns:repeat(7,1fr)}
+.flex{display:flex;flex-direction:column;gap:10px;height:100%}
+.fill{flex:1;min-height:0}
+
+/* Blank paper notepad: no lines, no dots */
+.notepad{
+  width:100%;height:100%;min-height:80px;
+  background:var(--white);border:1px solid var(--line);border-radius:10px;
+  padding:12px;font:inherit;font-size:13px;color:var(--ink);
+  resize:none;outline:none;
 }
-.binder::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:repeating-linear-gradient(180deg,transparent 0 58px,rgba(0,0,0,.07) 58px 60px);
+.notepad:focus{border-color:var(--t1)}
+
+input.ln{
+  width:100%;border:none;border-bottom:1px solid var(--line);background:transparent;
+  font:inherit;font-size:13px;padding:6px 2px;outline:none;color:var(--ink);
 }
+input.ln:focus{border-bottom-color:var(--t1)}
+select.ln{
+  font:inherit;font-size:13px;border:1px solid var(--line);border-radius:6px;padding:4px 6px;background:#fff;color:var(--ink);
+}
+.lbl{font-size:12px;color:var(--t3);font-weight:600}
+
+/* Cover */
+.cover{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  background:var(--white);
+}
+.cover .frame{position:absolute;inset:22px;border:1px solid var(--t1);border-radius:4px;pointer-events:none}
+.cover .eb{font-size:11px;letter-spacing:.4em;color:var(--t2);font-weight:700}
+.cover .hero{font-size:60px;line-height:1.05;margin:18px 0 14px}
+.cover .rule{width:90px;height:1px;background:var(--t1);margin:0 0 16px}
+.cover p{font-family:'Playfair Display',serif;font-style:italic;font-size:18px;color:var(--ink);margin:0 0 26px}
+.btn{
+  display:inline-block;text-decoration:none;background:var(--t2);color:#fff;
+  padding:12px 30px;border-radius:999px;font-weight:600;font-size:13px;letter-spacing:.06em;
+}
+.btn:hover{background:var(--t3)}
+
+/* Index */
+.idx{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:8px}
+.idx a{
+  display:flex;justify-content:space-between;align-items:center;text-decoration:none;color:var(--ink);
+  background:var(--offwhite);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-weight:600;font-size:13px;
+}
+.idx a:hover{border-color:var(--t1);color:var(--t3)}
+.idx a small{color:var(--muted);font-weight:500;font-size:11px}
+
+/* Calendars */
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal .dh{font-size:10px;text-transform:uppercase;color:var(--muted);text-align:center;font-weight:700;padding:3px 0}
+.cal a{
+  display:flex;flex-direction:column;justify-content:space-between;
+  min-height:58px;background:var(--offwhite);border:1px solid var(--line);border-radius:8px;
+  padding:5px 6px;text-decoration:none;color:var(--ink);font-family:'Playfair Display',serif;font-size:15px;font-weight:600;
+}
+.cal a:hover{border-color:var(--t1)}
+.cal a.hol{background:#F6E6DE}
+.cal a small{font-family:'Plus Jakarta Sans',sans-serif;font-size:8.5px;color:var(--t2);line-height:1.2;font-weight:600}
+.cal .blank{min-height:58px}
+.mini{background:var(--offwhite);border:1px solid var(--line);border-radius:10px;padding:8px}
+.mini a{display:block;text-align:center;font-family:'Playfair Display',serif;color:var(--t3);text-decoration:none;font-weight:600;font-size:14px;margin-bottom:4px}
+.mini .mg{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;font-size:8px;text-align:center}
+.mini .mg span{padding:1px 0}
+.mini .mg .h{color:var(--muted);font-weight:700}
+
+/* Reading */
+table.t{width:100%;border-collapse:collapse;font-size:12px}
+table.t th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--t2);border-bottom:1px solid var(--t2);padding:6px 4px}
+table.t td{border-bottom:1px solid var(--line);padding:2px 4px}
+table.t td input{padding:6px 2px;font-size:12px}
+.chk{display:grid;grid-template-columns:repeat(13,1fr);gap:5px;margin-top:6px}
+.box{
+  aspect-ratio:1;border:1px solid #D9D9D9;border-radius:4px;background:#fff;cursor:pointer;padding:0;
+  font-size:9px;color:var(--muted);
+}
+.box.on{background:var(--t1);border-color:var(--t1);color:#fff}
+
+/* Daily schedule */
+.sched{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;height:100%;display:flex;flex-direction:column}
+.hrow{display:grid;grid-template-columns:64px 1fr;flex:1;border-bottom:1px solid var(--line);min-height:22px}
+.hrow:last-child{border-bottom:0}
+.hrow .t{font-size:10px;color:var(--t2);font-weight:700;padding:6px 8px;background:var(--offwhite);border-right:1px solid var(--line)}
+.hrow input{padding:2px 8px;font-size:12px;border:none;border-bottom:none}
+
+/* Finance & habits */
+.habits{display:grid;grid-template-columns:150px repeat(31,1fr);gap:3px;align-items:center}
+.habits .hd{font-size:9px;color:var(--muted);text-align:center;font-weight:700}
+.habits .hn{font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.habits .box{border-radius:3px}
+
+.badge-n{font-size:11px;color:var(--muted)}
 
 /* ---------- SIDEBAR TABS ---------- */
 .tabs{
-  position:absolute;
-  right:-26px;
-  top:24px;
-  bottom:24px;
-  width:58px;
-  display:flex;
-  flex-direction:column;
-  gap:3px;
-  z-index:4;
+  position:absolute;right:0;top:18px;bottom:18px;width:66px;
+  display:flex;flex-direction:column;gap:4px;
+  z-index:5;
 }
 .tab{
-  flex:1;
-  min-height:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  font-size:9px;
-  line-height:1.15;
-  font-weight:700;
-  letter-spacing:.04em;
-  text-transform:uppercase;
-  color:#fff;
-  text-decoration:none;
-  padding:2px 6px;
-  border-radius:0 8px 8px 0;
-  background:var(--rose);
-  box-shadow:2px 2px 6px rgba(0,0,0,.14);
-  transition:transform .15s ease, background .15s ease;
+  flex:1;display:flex;align-items:center;justify-content:center;text-align:center;
+  font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  text-decoration:none;color:var(--t3);background:var(--offwhite);
+  border:1px solid var(--line);border-right:none;border-radius:8px 0 0 8px;padding:2px 4px;
+  box-shadow:-2px 2px 6px rgba(0,0,0,.05);
 }
-.tab:nth-child(odd){background:var(--terra)}
-.tab:nth-child(even){background:var(--mauve)}
-.tab:hover{transform:translateX(-6px)}
-.tab.on{background:var(--ink)}
+.tab:hover{background:#F3E3DC}
+.tab.on{background:var(--t2);color:#fff;border-color:var(--t2)}
 
-/* ---------- STAGE & PAGES ---------- */
-.stage{position:absolute;inset:0;border-radius:inherit;overflow:hidden}
-.page{
-  position:absolute;
-  inset:0;
-  padding:24px 80px 22px 60px;
-  overflow:auto;
-  background:var(--linen);
-  border-radius:inherit;
-}
-.page h1{
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-weight:600;
-  font-size:32px;
-  color:var(--terra);
-  margin:2px 0 6px;
-  letter-spacing:.01em;
-}
-.page h2{
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-weight:600;
-  font-size:20px;
-  color:var(--terra);
-  margin:0 0 8px;
-}
-.page h3{
-  font-size:12px;
-  text-transform:uppercase;
-  letter-spacing:.1em;
-  color:var(--ink);
-  margin:0 0 6px;
-  font-weight:700;
-}
-.eyebrow{
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:.2em;
-  color:var(--mauve);
-  font-weight:700;
-}
-.muted{color:var(--mauve);font-size:12px}
-.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-.grow{flex:1}
-.spacer{height:12px}
-
-.card{
-  background:var(--white);
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:12px 14px;
-  box-shadow:0 2px 6px rgba(43,37,35,.04);
-}
-.card.fill{display:flex;flex-direction:column}
-.card.fill textarea{flex:1}
-
-input,textarea,select{
-  font-family:inherit;
-  color:var(--ink);
-  background:transparent;
-  border:none;
-  outline:none;
-  width:100%;
-  font-size:13px;
-}
-input.line,select.line{
-  border-bottom:1px solid var(--line);
-  padding:6px 2px;
-}
-input.line:focus,textarea:focus,select:focus{border-color:var(--terra)}
-textarea.lines{
-  font-size:13px;
-  line-height:24px;
-  padding:0 4px;
-  resize:none;
-  background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 23px,var(--line) 23px,var(--line) 24px);
-  background-attachment:local;
-}
-textarea.dotted{
-  background-image:radial-gradient(circle,var(--line) 1px,transparent 1.2px);
-  background-size:18px 18px;
-  background-attachment:local;
-  line-height:18px;
-}
-
-.btn{
-  display:inline-block;
-  padding:9px 18px;
-  border-radius:999px;
-  background:var(--terra);
-  color:#fff;
-  text-decoration:none;
-  font-weight:600;
-  font-size:13px;
-  border:1px solid var(--terra);
-  cursor:pointer;
-  letter-spacing:.02em;
-}
-.btn:hover{background:var(--ink);border-color:var(--ink)}
-.btn.ghost{background:transparent;color:var(--terra)}
-.btn.ghost:hover{background:var(--terra);color:#fff}
-.btn.big{padding:14px 34px;font-size:14px}
-
-/* ---------- COVER ---------- */
-.cover{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:40px 80px 40px 60px;
-  background:radial-gradient(circle at 50% 40%,#FFFFFF 0%,var(--linen) 65%,#F4E8E1 100%);
-}
-.frame{
-  position:absolute;
-  inset:18px 100px 18px 50px;
-  border:2px solid var(--terra);
-  border-radius:4px;
-  pointer-events:none;
-}
-.frame::before{
-  content:"";
-  position:absolute;
-  inset:6px;
-  border:1px solid var(--rose);
-  border-radius:2px;
-}
-.badge{
-  font-size:10px;
-  letter-spacing:.3em;
-  font-weight:700;
-  color:var(--terra);
-  border:1px solid var(--terra);
-  padding:6px 18px;
-  border-radius:30px;
-}
-.ctitle{
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:64px;
-  line-height:1.05;
-  font-weight:600;
-  color:var(--terra);
-  margin:18px 0 14px;
-}
-.divider{
-  width:120px;
-  height:1px;
-  background:var(--rose);
-  position:relative;
-  margin:6px 0 18px;
-}
-.divider::after{
-  content:"";
-  position:absolute;
-  left:50%;top:-4px;
-  width:8px;height:8px;
-  margin-left:-4px;
-  background:var(--terra);
-  transform:rotate(45deg);
-}
-.quote{
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-style:italic;
-  font-size:22px;
-  color:var(--ink);
-  max-width:520px;
-  margin:0 0 28px;
-  line-height:1.4;
-}
-
-/* ---------- INDEX ---------- */
-.idx{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:10px;
-  margin-top:12px;
-}
-.idx a{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  background:var(--white);
-  border:1px solid var(--line);
-  border-radius:10px;
-  padding:10px 12px;
-  text-decoration:none;
-  color:var(--ink);
-  font-weight:600;
-  font-size:12px;
-}
-.idx a span.n{
-  font-family:'Cormorant Garamond',serif;
-  color:var(--terra);
-  font-size:18px;
-  font-weight:700;
-}
-.idx a:hover{border-color:var(--terra)}
-.steps{margin:6px 0 0;padding-left:18px;font-size:13px;line-height:1.6}
-.steps li{margin-bottom:4px}
-
-/* ---------- CALENDARS ---------- */
-.cal{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:4px;
-}
-.cal .dh{
-  font-size:10px;
-  text-transform:uppercase;
-  color:var(--mauve);
-  text-align:center;
-  font-weight:700;
-  padding:2px 0;
-}
-.day{
-  background:var(--white);
-  border:1px solid var(--line);
-  border-radius:8px;
-  min-height:62px;
-  padding:4px 6px;
-  text-decoration:none;
-  color:var(--ink);
-  display:flex;
-  flex-direction:column;
-  overflow:hidden;
-}
-.day:hover{border-color:var(--terra)}
-.day .n{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;line-height:1}
-.day small{font-size:9px;line-height:1.2;color:var(--terra);margin-top:auto;font-weight:600}
-.day.hol{background:var(--holiday)}
-.day.obs{background:var(--observance)}
-.day.blank{background:transparent;border:0;pointer-events:none}
-
-.year-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px;
-}
-.mini{
-  background:var(--white);
-  border:1px solid var(--line);
-  border-radius:10px;
-  padding:6px 8px;
-}
-.mini a.mt{
-  display:block;
-  text-align:center;
-  text-decoration:none;
-  color:var(--terra);
-  font-family:'Cormorant Garamond',serif;
-  font-size:15px;
-  font-weight:700;
-  margin-bottom:4px;
-}
-.mini .mcal{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:1px;
-  font-size:8px;
-  text-align:center;
-}
-.mini .mcal span{padding:1px 0;border-radius:3px}
-.mini .mcal .hd{color:var(--mauve);font-weight:700}
-.mini .mcal .hl{background:var(--holiday);color:var(--terra);font-weight:700}
-
-/* ---------- MONTHLY ---------- */
-.mbody{display:grid;grid-template-columns:1fr 230px;gap:14px;margin-top:8px}
-.side{display:flex;flex-direction:column;gap:10px}
-.side .card{flex:1;display:flex;flex-direction:column}
-.side .card textarea{flex:1;min-height:60px}
-.mnav{display:flex;align-items:center;gap:10px;margin-bottom:6px}
-.mnav a{
-  text-decoration:none;
-  color:var(--terra);
-  font-weight:700;
-  font-size:12px;
-  border:1px solid var(--terra);
-  border-radius:999px;
-  padding:4px 12px;
-}
-.mnav a:hover{background:var(--terra);color:#fff}
-
-/* ---------- WEEKLY ---------- */
-.week{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:8px;
-  height:300px;
-}
-.week .card{display:flex;flex-direction:column;padding:8px}
-.week .card a{
-  text-decoration:none;
-  color:var(--ink);
-  font-weight:700;
-  font-size:12px;
-  border-bottom:1px solid var(--line);
-  padding-bottom:4px;
-  margin-bottom:4px;
-}
-.week .card a:hover{color:var(--terra)}
-.week .card textarea{flex:1}
-.bottom2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
-.bottom2 .card textarea{height:110px}
-
-/* ---------- DAILY ---------- */
-.daily{display:grid;grid-template-columns:1fr 290px;gap:14px;margin-top:8px;height:calc(100% - 90px)}
-.timeblock{display:flex;flex-direction:column;background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-.hourrow{
-  display:grid;
-  grid-template-columns:60px 1fr;
-  border-bottom:1px solid var(--line);
-  min-height:30px;
-  flex:1;
-}
-.hourrow:last-child{border-bottom:0}
-.hourrow .t{
-  font-size:11px;
-  color:var(--terra);
-  font-weight:700;
-  padding:6px 8px;
-  border-right:1px solid var(--line);
-  background:#FCF7F3;
-}
-.hourrow input{padding:4px 8px;font-size:12px}
-.dside{display:flex;flex-direction:column;gap:10px;overflow:auto}
-.dside .card{padding:10px 12px}
-.toggles{display:flex;flex-wrap:wrap;gap:6px}
-.tog{
-  background:var(--white);
-  border:1px solid var(--taupe);
-  border-radius:8px;
-  padding:6px 9px;
-  font-family:inherit;
-  font-size:11px;
-  color:var(--ink);
-  cursor:pointer;
-  text-align:left;
-}
-.tog.on{background:var(--terra);color:#fff;border-color:var(--terra)}
-.tog.round{border-radius:50%;width:26px;height:26px;padding:0}
-.hlist{display:flex;flex-direction:column;gap:5px}
-.hlist .tog{width:100%}
-
-/* ---------- WELLNESS ---------- */
-.hgrid{
-  display:grid;
-  grid-template-columns:150px repeat(31,1fr) 52px;
-  gap:3px;
-  align-items:center;
-  margin-top:8px;
-}
-.hgrid .hd{
-  font-size:9px;
-  color:var(--mauve);
-  text-align:center;
-  font-weight:700;
-}
-.hgrid input{font-size:12px;padding:4px 2px;border-bottom:1px solid var(--line)}
-.hgrid .cell{
-  width:100%;
-  aspect-ratio:1;
-  padding:0;
-  border-radius:4px;
-  border:1px solid var(--taupe);
-  background:var(--white);
-  cursor:pointer;
-}
-.hgrid .cell.on{background:var(--terra);border-color:var(--terra)}
-.hgrid .cell.empty{visibility:hidden}
-.hgrid .sum{font-size:11px;font-weight:700;color:var(--terra);text-align:center}
-.bar{height:8px;background:var(--line);border-radius:999px;overflow:hidden;margin-top:6px}
-.bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--rose),var(--terra));border-radius:999px}
-
-/* ---------- TABLES (FINANCE & READING) ---------- */
-.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
-table.t{width:100%;border-collapse:collapse;font-size:12px}
-table.t th{
-  text-align:left;
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:.1em;
-  color:var(--terra);
-  border-bottom:1px solid var(--terra);
-  padding:6px 4px;
-}
-table.t td{border-bottom:1px solid var(--line);padding:2px 4px}
-table.t td input{padding:6px 2px;font-size:12px}
-table.t td.num{text-align:right;font-weight:600}
-table.t tr.total td{font-weight:700;color:var(--terra);border-top:1px solid var(--terra)}
-.del{
-  background:none;
-  border:none;
-  color:var(--mauve);
-  font-size:16px;
-  cursor:pointer;
-  padding:0 4px;
-}
-.del:hover{color:var(--terra)}
-.scroll{max-height:300px;overflow:auto}
-.addbook{display:grid;grid-template-columns:2fr 1.4fr 0.8fr 1fr 0.8fr auto;gap:8px;align-items:center;margin-top:8px}
-.addbook input,.addbook select{font-size:12px;border-bottom:1px solid var(--line);padding:6px 2px}
-
-/* ---------- CUSTOM & NOTES ---------- */
-.cgrid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:12px;height:calc(100% - 90px);margin-top:8px}
-.cgrid .card{display:flex;flex-direction:column}
-.cgrid textarea{flex:1}
-.cgrid .title-input{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--terra);border-bottom:1px solid var(--line);padding:2px 0 6px;margin-bottom:6px}
-.notes-wrap{display:grid;grid-template-columns:2fr 1fr;gap:12px;height:calc(100% - 90px);margin-top:8px}
-.notes-wrap .card{display:flex;flex-direction:column}
-.notes-wrap textarea{flex:1}
-
-/* ---------- RESPONSIVE (small screens) ---------- */
-@media (max-width:760px){
-  .page{padding:20px 60px 18px 48px}
-  .idx{grid-template-columns:1fr 1fr}
-  .mbody,.daily,.fgrid,.bottom2,.notes-wrap,.cgrid{grid-template-columns:1fr}
-  .year-grid{grid-template-columns:repeat(2,1fr)}
-  .tab{font-size:7px}
-  .ctitle{font-size:44px}
-}
-
-/* ---------- PRINT / PDF ---------- */
-@page{ size:A4 landscape; margin:0; }
+/* ---------- PRINT ---------- */
+@page{size:A4 landscape;margin:0}
 @media print{
-  html,body{background:none;height:auto;padding:0;display:block}
-  .book{
-    width:297mm;
-    height:210mm;
-    aspect-ratio:auto;
-    box-shadow:none;
-    border-radius:0;
-    overflow:hidden;
-  }
-  .book::before{display:none}
-  .tabs,.no-print{display:none!important}
-  .stage{position:absolute;inset:0}
-  .page{
-    position:absolute;
-    inset:0;
-    overflow:hidden;
-    padding:12mm 14mm 12mm 26mm;
-    border-radius:0;
-  }
-  .frame{inset:8mm 8mm 8mm 22mm}
-  .card,.day,.tog,.hgrid .cell,.mini,.timeblock{break-inside:avoid}
+  html,body{background:#fff;height:auto}
+  .toolbar,.tabs{display:none!important}
+  body{display:block}
+  .book{width:297mm;height:210mm;aspect-ratio:auto;box-shadow:none;border-radius:0}
+  .page{padding:12mm 16mm 12mm 22mm;overflow:hidden}
+  .cover .frame{inset:8mm}
+  .card,.cal a,.idx a,.sched,.mini{break-inside:avoid}
+}
+
+@media (max-width:760px){
+  .page{padding:20px 60px 18px 40px}
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .idx{grid-template-columns:1fr}
+  .tab{font-size:7px}
+  h1{font-size:24px}
 }
 </style>
 </head>
 <body>
 
+<div class="toolbar no-print">
+  <button id="prev">&larr; Prev</button>
+  <span class="pg" id="pgLabel">Page 1 of 560</span>
+  <input id="jump" type="number" min="1" max="560" placeholder="Go to page" aria-label="Go to page">
+  <button id="next">Next &rarr;</button>
+  <button id="printBtn">Print / Save PDF</button>
+</div>
+
 <div class="book" id="book">
-  <div class="binder" aria-hidden="true"></div>
-  <nav class="tabs" id="tabs" aria-label="Planner sections"></nav>
   <main class="stage" id="stage"></main>
+  <nav class="tabs" id="tabs" aria-label="Planner sections"></nav>
 </div>
 
 <script>
-/* =========================================================
-   CONSTANTS & DATE HELPERS
-   ========================================================= */
-const YEAR = 2027;
-const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-const DOW_LONG = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-const DOW_SHORT = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-const HABITS = ['Drink water','Move my body','Read','Sleep 7+ hours','Journal','Mindfulness','Learn something','Connect with someone'];
-const BUDGET_CATS = ['Housing','Utilities','Groceries','Transport','Health','Savings','Entertainment','Other'];
-const MOODS = ['Great','Good','Okay','Low','Tough'];
-const KEY = 'intentionalPlanner2027';
-
-const pad = n => String(n).padStart(2,'0');
-const iso = (y,m,d) => `${y}-${pad(m)}-${pad(d)}`;          // m is 1-based
-const parseISO = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y,m-1,d); };
-const toISO = dt => iso(dt.getFullYear(), dt.getMonth()+1, dt.getDate());
-const addDays = (s,n) => { const d = parseISO(s); d.setDate(d.getDate()+n); return toISO(d); };
-const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const mod = (n,m) => ((n % m) + m) % m;
-
-function nthWeekday(y,m,wd,n){
-  const first = new Date(y,m-1,1);
-  const off = mod(wd - first.getDay(), 7);
-  return iso(y,m,1 + off + (n-1)*7);
-}
-function lastWeekday(y,m,wd){
-  const last = new Date(y,m,0);
-  const off = mod(last.getDay() - wd, 7);
-  return iso(y,m,last.getDate() - off);
-}
-/* Anonymous Gregorian algorithm for Easter Sunday */
-function easter(y){
-  const a = y % 19, b = Math.floor(y/100), c = y % 100;
-  const d = Math.floor(b/4), e = b % 4, f = Math.floor((b+8)/25);
-  const g = Math.floor((b-f+1)/3);
-  const h = mod(19*a + b - d - g + 15, 30);
-  const i = Math.floor(c/4), k = c % 4;
-  const l = mod(32 + 2*e + 2*i - h - k, 7);
-  const m = Math.floor((a + 11*h + 22*l) / 451);
-  const month = Math.floor((h + l - 7*m + 114) / 31);
-  const day = ((h + l - 7*m + 114) % 31) + 1;
-  return iso(y, month, day);
-}
-
-const HOLIDAYS = (() => {
-  const H = {};
-  const add = (k, name, type) => { H[k] = { name, type }; };
-  add(iso(YEAR,1,1), "New Year's Day", 'hol');
-  add(nthWeekday(YEAR,1,1,3), 'Martin Luther King Jr. Day', 'hol');
-  add(iso(YEAR,2,14), "Valentine's Day", 'obs');
-  add(nthWeekday(YEAR,2,1,3), "Presidents' Day", 'hol');
-  add(iso(YEAR,3,8), "International Women's Day", 'obs');
-  add(iso(YEAR,3,17), "St. Patrick's Day", 'obs');
-  add(iso(YEAR,3,20), 'International Day of Happiness', 'obs');
-  add(easter(YEAR), 'Easter Sunday', 'obs');
-  add(iso(YEAR,4,22), 'Earth Day', 'obs');
-  add(iso(YEAR,6,5), 'World Environment Day', 'obs');
-  add(nthWeekday(YEAR,5,0,2), "Mother's Day", 'obs');
-  add(lastWeekday(YEAR,5,1), 'Memorial Day', 'hol');
-  add(iso(YEAR,6,19), 'Juneteenth', 'hol');
-  add(nthWeekday(YEAR,6,0,3), "Father's Day", 'obs');
-  add(iso(YEAR,7,4), 'Independence Day', 'hol');
-  add(nthWeekday(YEAR,9,1,1), 'Labor Day', 'hol');
-  add(iso(YEAR,10,10), 'World Mental Health Day', 'obs');
-  add(nthWeekday(YEAR,10,1,2), "Columbus / Indigenous Peoples' Day", 'hol');
-  add(iso(YEAR,10,31), 'Halloween', 'obs');
-  add(iso(YEAR,11,11), 'Veterans Day', 'hol');
-  add(nthWeekday(YEAR,11,4,4), 'Thanksgiving', 'hol');
-  add(iso(YEAR,12,10), 'Human Rights Day', 'obs');
-  add(iso(YEAR,12,25), 'Christmas Day', 'hol');
-  return H;
-})();
-
-/* =========================================================
-   STORAGE (saved in this browser only)
-   ========================================================= */
-let store = {};
-try { store = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ store = {}; }
-function save(){ try { localStorage.setItem(KEY, JSON.stringify(store)); } catch(e){} }
-const on = k => !!store[k];
-const weekStartIndex = () => store.weekStart === 'mon' ? 1 : 0;
-const startOfWeek = s => {
-  const d = parseISO(s);
-  const diff = mod(d.getDay() - weekStartIndex(), 7);
-  d.setDate(d.getDate() - diff);
-  return toISO(d);
+/* =====================================================
+   CONSTANTS
+   ===================================================== */
+const TOTAL = 560;
+const MN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DN = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const DS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const HABITS = ['Reading','Movement','Sleep 7+ hrs','Journaling','Meditation','Learning','Connection','Gratitude'];
+const BUDGET = ['Housing','Utilities','Groceries','Transport','Health','Savings','Entertainment','Other'];
+const OBS = {
+  '1-1':"New Year's Day", '2-14':"Valentine's Day", '3-8':"International Women's Day",
+  '3-20':'International Day of Happiness', '4-22':'Earth Day', '6-5':'World Environment Day',
+  '10-10':'World Mental Health Day', '12-10':'Human Rights Day'
 };
-const habitName = i => store['habit-'+i] || HABITS[i];
-const fmt = v => (v < 0 ? '-' : '') + '$' + Math.abs(v).toFixed(2);
-
-/* =========================================================
-   REUSABLE BLOCKS
-   ========================================================= */
-function dayCell(y,m,d){
-  const key = iso(y,m,d);
-  const h = HOLIDAYS[key];
-  const cls = h ? (h.type === 'hol' ? 'hol' : 'obs') : '';
-  return `<a class="day ${cls}" href="#daily/${key}" title="${esc(h ? h.name : '')}">
-            <span class="n">${d}</span>${h ? `<small>${esc(h.name)}</small>` : ''}
-          </a>`;
-}
-function leadingBlanks(n){ return '<div class="day blank"></div>'.repeat(n); }
-function weekdayHeaders(){
-  const ws = weekStartIndex();
-  const names = DOW_SHORT.slice(ws).concat(DOW_SHORT.slice(0,ws));
-  return names.map(n => `<div class="dh">${n}</div>`).join('');
-}
-function miniMonth(m){
-  const first = new Date(YEAR,m-1,1);
-  const ws = weekStartIndex();
-  const off = mod(first.getDay() - ws, 7);
-  const days = new Date(YEAR,m,0).getDate();
-  const names = DOW_SHORT.slice(ws).concat(DOW_SHORT.slice(0,ws));
-  let cells = names.map(n => `<span class="hd">${n[0]}</span>`).join('');
-  cells += '<span></span>'.repeat(off);
-  for(let d=1; d<=days; d++){
-    const h = HOLIDAYS[iso(YEAR,m,d)];
-    cells += `<span class="${h && h.type==='hol' ? 'hl' : ''}">${d}</span>`;
-  }
-  return cells;
-}
-function nav(prevHref, nextHref, label){
-  return `<div class="mnav">
-    <a href="${prevHref}">&larr; Prev</a>
-    <strong style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink)">${esc(label)}</strong>
-    <a href="${nextHref}">Next &rarr;</a>
-  </div>`;
-}
-
-/* =========================================================
-   PAGES
-   ========================================================= */
-const PAGES = {};
-
-PAGES.cover = () => `
-  <section class="page cover">
-    <div class="frame"></div>
-    <span class="badge">DIGITAL PLANNER &middot; 2027</span>
-    <h1 class="ctitle">Intentional<br>Living</h1>
-    <div class="divider"></div>
-    <p class="quote">&ldquo;Write your own story, one intentional day at a time.&rdquo;</p>
-    <a class="btn big" href="#index">Enter Planner</a>
-  </section>`;
-
-PAGES.index = () => {
-  const ws = store.weekStart || 'sun';
-  const months = MONTHS.map((m,i) =>
-    `<a href="#monthly/${i+1}"><span class="n">${pad(i+1)}</span>${m}</a>`).join('');
-  return `
-  <section class="page">
-    <div class="eyebrow">Master Index</div>
-    <h1>Welcome &amp; Getting Started</h1>
-    <div class="grid" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px">
-      <div class="card">
-        <h3>How to use this planner</h3>
-        <ol class="steps">
-          <li>Use the tabs on the right edge to jump between sections.</li>
-          <li>Tap any date in the Monthly view to open its Daily page.</li>
-          <li>Tap the circles and boxes to mark habits and water as done.</li>
-          <li>Everything you type saves automatically in this browser.</li>
-          <li>Use Print / Save as PDF to export the page you are viewing.</li>
-        </ol>
-        <div class="spacer"></div>
-        <h3>Week starts on</h3>
-        <select class="line" data-save="weekStart" data-rerender="1">
-          <option value="sun" ${ws==='sun'?'selected':''}>Sunday</option>
-          <option value="mon" ${ws==='mon'?'selected':''}>Monday</option>
-        </select>
-        <div class="spacer"></div>
-        <button class="btn ghost no-print" data-action="print">Print / Save as PDF</button>
-      </div>
-      <div class="card">
-        <h3>Quick links</h3>
-        <div class="idx" style="grid-template-columns:1fr 1fr;margin-top:0">
-          <a href="#yearly"><span class="n">Y</span>Yearly Overview</a>
-          <a href="#weekly/2027-01-01"><span class="n">W</span>Weekly View</a>
-          <a href="#daily/2027-01-01"><span class="n">D</span>Daily View</a>
-          <a href="#finance"><span class="n">F</span>Finance</a>
-          <a href="#wellness/1"><span class="n">H</span>Wellness</a>
-          <a href="#reading"><span class="n">R</span>Reading Journal</a>
-          <a href="#custom"><span class="n">C</span>Custom Sections</a>
-          <a href="#notes"><span class="n">N</span>Notes</a>
-        </div>
-      </div>
-    </div>
-    <div class="spacer"></div>
-    <h3>Monthly views &middot; 2027</h3>
-    <div class="idx">${months}</div>
-  </section>`;
-};
-
-PAGES.yearly = () => {
-  const minis = MONTHS.map((m,i) => `
-    <div class="mini">
-      <a class="mt" href="#monthly/${i+1}">${m}</a>
-      <div class="mcal">${miniMonth(i+1)}</div>
-    </div>`).join('');
-  const goals = [0,1,2,3,4].map(i => `
-    <div class="row" style="margin:4px 0">
-      <span style="font-family:'Cormorant Garamond',serif;color:var(--terra);font-weight:700;width:14px">${i+1}</span>
-      <input class="line grow" data-save="goal-${i}" placeholder="Annual goal ${i+1}">
-    </div>`).join('');
-  const qs = ['Q1','Q2','Q3','Q4'].map((q,i) => `
-    <div class="row" style="margin:4px 0">
-      <span style="font-family:'Cormorant Garamond',serif;color:var(--terra);font-weight:700;width:26px">${q}</span>
-      <input class="line grow" data-save="milestone-${i}" placeholder="Milestone for ${q}">
-    </div>`).join('');
-  return `
-  <section class="page">
-    <div class="eyebrow">Yearly Overview</div>
-    <h1>Year at a Glance &middot; 2027</h1>
-    <div class="grid" style="display:grid;grid-template-columns:1.25fr 1fr;gap:14px;margin-top:6px">
-      <div class="year-grid">${minis}</div>
-      <div style="display:flex;flex-direction:column;gap:10px">
-        <div class="card">
-          <h3>Vision Board</h3>
-          <textarea class="lines" rows="4" data-save="vision" placeholder="Describe the life you are building..."></textarea>
-        </div>
-        <div class="card">
-          <h3>Why This Matters</h3>
-          <textarea class="lines" rows="2" data-save="why" placeholder="Your deeper reasons..."></textarea>
-        </div>
-        <div class="card">
-          <h3>Top 5 Annual Goals</h3>
-          ${goals}
-        </div>
-        <div class="card">
-          <h3>Quarterly Milestones</h3>
-          ${qs}
-        </div>
-      </div>
-    </div>
-  </section>`;
-};
-
-PAGES.monthly = (p) => {
-  let m = parseInt(p,10);
-  if(!(m >= 1 && m <= 12)) m = 1;
-  store.lastMonth = m;
-  const first = new Date(YEAR,m-1,1);
-  const ws = weekStartIndex();
-  const off = mod(first.getDay() - ws, 7);
-  const days = new Date(YEAR,m,0).getDate();
-  let cells = '';
-  cells += leadingBlanks(off);
-  for(let d=1; d<=days; d++) cells += dayCell(YEAR,m,d);
-  const prev = m === 1 ? 12 : m-1;
-  const next = m === 12 ? 1 : m+1;
-  const monthHolidays = Object.entries(HOLIDAYS)
-    .filter(([k]) => k.startsWith(`${YEAR}-${pad(m)}-`))
-    .map(([k,v]) => `<li><strong>${parseISO(k).getDate()}</strong> &middot; ${esc(v.name)}</li>`).join('');
-  return `
-  <section class="page">
-    <div class="eyebrow">Monthly View &middot; 2027</div>
-    ${nav(`#monthly/${prev}`, `#monthly/${next}`, MONTHS[m-1])}
-    <div class="mbody">
-      <div>
-        <div class="cal">${weekdayHeaders()}${cells}</div>
-      </div>
-      <div class="side">
-        <div class="card">
-          <h3>Monthly Goals</h3>
-          <textarea class="lines" data-save="mg-${m}" placeholder="What matters this month?"></textarea>
-        </div>
-        <div class="card">
-          <h3>Key Dates &amp; Holidays</h3>
-          <ul style="margin:0 0 6px;padding-left:16px;font-size:11px;line-height:1.5">${monthHolidays || '<li>No holidays listed</li>'}</ul>
-          <textarea class="lines" data-save="kd-${m}" placeholder="Your own key dates..."></textarea>
-        </div>
-        <div class="card">
-          <h3>Monthly Review</h3>
-          <textarea class="lines" data-save="mr-${m}" placeholder="Wins, lessons, and what to change..."></textarea>
-        </div>
-      </div>
-    </div>
-  </section>`;
-};
-
-PAGES.weekly = (p) => {
-  const dateStr = /^\d{4}-\d{2}-\d{2}$/.test(p || '') ? p : '2027-01-01';
-  const start = startOfWeek(dateStr);
-  store.lastWeek = start;
-  const first = parseISO(start);
-  const last = parseISO(addDays(start,6));
-  const label = `${first.toLocaleDateString('en-US',{month:'short',day:'numeric'})} &ndash; ${last.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}`;
-  const cards = Array.from({length:7}, (_,i) => {
-    const day = addDays(start,i);
-    const dt = parseISO(day);
-    const hol = HOLIDAYS[day];
-    return `
-      <div class="card">
-        <a href="#daily/${day}">${DOW_LONG[dt.getDay()].slice(0,3)} &middot; ${dt.getDate()}${hol ? `<br><span style="color:var(--terra);font-size:9px">${esc(hol.name)}</span>` : ''}</a>
-        <textarea class="lines" data-save="wk-${day}" placeholder="Plans..."></textarea>
-      </div>`;
-  }).join('');
-  const prev = addDays(start,-7), next = addDays(start,7);
-  return `
-  <section class="page">
-    <div class="eyebrow">Weekly View</div>
-    ${nav(`#weekly/${prev}`, `#weekly/${next}`, label)}
-    <div class="week">${cards}</div>
-    <div class="bottom2">
-      <div class="card">
-        <h3>Top Priorities This Week</h3>
-        <textarea class="lines" data-save="wkf-${start}" placeholder="The 3 things that would make this week a success..."></textarea>
-      </div>
-      <div class="card">
-        <h3>Weekly Reflection</h3>
-        <textarea class="lines" data-save="wkr-${start}" placeholder="What worked, what didn't, what I'm grateful for..."></textarea>
-      </div>
-    </div>
-  </section>`;
-};
-
-PAGES.daily = (p) => {
-  const s = /^\d{4}-\d{2}-\d{2}$/.test(p || '') ? p : '2027-01-01';
-  store.lastDay = s;
-  const dt = parseISO(s);
-  const nice = dt.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
-  const hol = HOLIDAYS[s];
-  let hours = '';
-  for(let h=6; h<=22; h++){
-    hours += `<div class="hourrow"><div class="t">${pad(h)}:00</div><input data-save="dh-${s}-${h}" placeholder=""></div>`;
-  }
-  const habitBtns = HABITS.map((_,i) =>
-    `<button class="tog ${on('dhab-'+s+'-'+i)?'on':''}" data-toggle="dhab-${s}-${i}" aria-pressed="${on('dhab-'+s+'-'+i)}">${esc(habitName(i))}</button>`
-  ).join('');
-  const water = Array.from({length:8}, (_,i) =>
-    `<button class="tog round ${on('dw-'+s+'-'+i)?'on':''}" data-toggle="dw-${s}-${i}" aria-label="Glass ${i+1}" aria-pressed="${on('dw-'+s+'-'+i)}"></button>`
-  ).join('');
-  const moodOpts = ['<option value="">Mood...</option>'].concat(
-    MOODS.map(x => `<option value="${x}">${x}</option>`)).join('');
-  return `
-  <section class="page">
-    <div class="eyebrow">Daily View${hol ? ' &middot; ' + esc(hol.name) : ''}</div>
-    ${nav(`#daily/${addDays(s,-1)}`, `#daily/${addDays(s,1)}`, nice)}
-    <div class="daily">
-      <div class="timeblock">
-        <div style="padding:6px 10px;border-bottom:1px solid var(--line);font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--mauve);font-weight:700">Time Blocking</div>
-        ${hours}
-      </div>
-      <div class="dside">
-        <div class="card">
-          <h3>Top 3 Priorities</h3>
-          <input class="line" data-save="dp1-${s}" placeholder="1.">
-          <input class="line" data-save="dp2-${s}" placeholder="2.">
-          <input class="line" data-save="dp3-${s}" placeholder="3.">
-        </div>
-        <div class="card">
-          <h3>Habits</h3>
-          <div class="hlist">${habitBtns}</div>
-        </div>
-        <div class="card">
-          <h3>Water Intake</h3>
-          <div class="toggles">${water}</div>
-        </div>
-        <div class="card">
-          <h3>Mood</h3>
-          <select class="line" data-save="dm-${s}">${moodOpts}</select>
-        </div>
-        <div class="card">
-          <h3>Gratitude</h3>
-          <textarea class="lines" rows="3" data-save="dg-${s}" placeholder="Three things I appreciate..."></textarea>
-        </div>
-        <div class="card">
-          <h3>Daily Reflection</h3>
-          <textarea class="lines" rows="3" data-save="dr-${s}" placeholder="How did today go?"></textarea>
-        </div>
-      </div>
-    </div>
-  </section>`;
-};
-
-PAGES.finance = () => {
-  const budgetRows = BUDGET_CATS.map((c,i) => `
-    <tr>
-      <td>${esc(c)}</td>
-      <td><input type="number" step="0.01" min="0" class="fin fin-plan" data-save="fb-p-${i}" placeholder="0.00"></td>
-      <td><input type="number" step="0.01" min="0" class="fin fin-act" data-save="fb-a-${i}" placeholder="0.00"></td>
-    </tr>`).join('');
-  const goalRows = [0,1,2,3].map(i => {
-    const t = parseFloat(store['sg-t-'+i]) || 0;
-    const s = parseFloat(store['sg-s-'+i]) || 0;
-    const pct = t > 0 ? Math.min(100, s/t*100) : 0;
-    return `
-    <tr>
-      <td><input data-save="sg-n-${i}" placeholder="Goal ${i+1}"></td>
-      <td><input type="number" step="0.01" min="0" data-save="sg-t-${i}" placeholder="Target"></td>
-      <td><input type="number" step="0.01" min="0" data-save="sg-s-${i}" placeholder="Saved"></td>
-      <td class="num" style="width:70px">${pct.toFixed(0)}%</td>
-    </tr>
-    <tr><td colspan="4" style="padding:0 0 6px"><div class="bar"><i style="width:${pct}%"></i></div></td></tr>`;
-  }).join('');
-  return `
-  <section class="page">
-    <div class="eyebrow">Financial Hub</div>
-    <h1>Budget &amp; Savings</h1>
-    <p class="muted" style="margin:0">Amounts are shown in USD. Enter numbers only.</p>
-    <div class="fgrid">
-      <div class="card">
-        <h3>Monthly Budget</h3>
-        <table class="t">
-          <tr><th>Category</th><th>Planned</th><th>Actual</th></tr>
-          ${budgetRows}
-          <tr class="total"><td>Total</td><td class="num" id="fin-plan-total">${fmt(0)}</td><td class="num" id="fin-act-total">${fmt(0)}</td></tr>
-          <tr class="total"><td colspan="2">Left to spend</td><td class="num" id="fin-left">${fmt(0)}</td></tr>
-        </table>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:12px">
-        <div class="card">
-          <h3>Savings &amp; Debt Goals</h3>
-          <table class="t">
-            <tr><th>Goal</th><th>Target</th><th>Saved</th><th></th></tr>
-            ${goalRows}
-          </table>
-        </div>
-        <div class="card" style="flex:1;display:flex;flex-direction:column">
-          <h3>Notes</h3>
-          <textarea class="lines" data-save="fin-notes" placeholder="Money notes, subscriptions to review, ideas..." style="flex:1;min-height:120px"></textarea>
-        </div>
-      </div>
-    </div>
-  </section>`;
-};
-
-PAGES.wellness = (p) => {
-  let m = parseInt(p,10);
-  if(!(m >= 1 && m <= 12)) m = 1;
-  store.lastWellMonth = m;
-  const days = new Date(YEAR,m,0).getDate();
-  let header = '<div></div>';
-  for(let d=1; d<=31; d++) header += `<div class="hd">${d <= days ? d : ''}</div>`;
-  header += '<div class="hd">Done</div>';
-  const rows = HABITS.map((_,i) => {
-    let row = `<input data-save="habit-${i}" placeholder="${esc(HABITS[i])}">`;
-    let done = 0;
-    for(let d=1; d<=31; d++){
-      if(d > days){ row += '<span class="cell empty"></span>'; continue; }
-      const k = `hk-${m}-${i}-${d}`;
-      if(on(k)) done++;
-      row += `<button class="cell ${on(k)?'on':''}" data-toggle="${k}" aria-pressed="${on(k)}" aria-label="${HABITS[i]} day ${d}"></button>`;
-    }
-    row += `<div class="sum">${done}</div>`;
-    return row;
-  }).join('');
-  const prev = m === 1 ? 12 : m-1;
-  const next = m === 12 ? 1 : m+1;
-  return `
-  <section class="page">
-    <div class="eyebrow">Habit &amp; Wellness Tracker</div>
-    ${nav(`#wellness/${prev}`, `#wellness/${next}`, MONTHS[m-1] + ' 2027')}
-    <p class="muted" style="margin:0">Tap a box to mark it done. Rename any habit in the left column.</p>
-    <div class="card" style="margin-top:8px">
-      <div class="hgrid">${header}${rows}</div>
-    </div>
-    <div class="spacer"></div>
-    <div class="fgrid" style="margin-top:0">
-      <div class="card">
-        <h3>Wellness Notes</h3>
-        <textarea class="lines" data-save="well-notes-${m}" placeholder="How did my body and mind feel this month?"></textarea>
-      </div>
-      <div class="card">
-        <h3>Monthly Reflection</h3>
-        <textarea class="lines" data-save="well-ref-${m}" placeholder="What habit felt easiest? Which one needs a new approach?"></textarea>
-      </div>
-    </div>
-  </section>`;
-};
-
-PAGES.reading = () => {
-  const books = Array.isArray(store.books) ? store.books : [];
-  const finished = books.filter(b => b.status === 'Finished').length;
-  const goal = parseFloat(store['rc-goal']) || 0;
-  const pct = goal > 0 ? Math.min(100, finished/goal*100) : 0;
-  const rows = books.map((b,i) => `
-    <tr>
-      <td>${esc(b.title)}</td>
-      <td>${esc(b.author)}</td>
-      <td class="num">${esc(b.pages)}</td>
-      <td>${esc(b.status)}</td>
-      <td>${b.rating ? '&#9733;'.repeat(Number(b.rating)) : ''}</td>
-      <td><button class="del" data-action="del-book" data-i="${i}" aria-label="Remove book">&times;</button></td>
-    </tr>`).join('');
-  return `
-  <section class="page">
-    <div class="eyebrow">Reading Journal</div>
-    <h1>Book Tracker &amp; Reading Challenge</h1>
-    <div class="fgrid" style="grid-template-columns:1fr 1.4fr;margin-top:4px">
-      <div class="card">
-        <h3>Reading Challenge 2027</h3>
-        <div class="row" style="margin-bottom:4px">
-          <span style="font-size:12px">Goal:</span>
-          <input type="number" min="0" class="line" style="width:90px" data-save="rc-goal" placeholder="Books">
-        </div>
-        <p style="margin:8px 0 2px;font-size:13px"><strong>${finished}</strong> of ${goal || '...'} books finished</p>
-        <div class="bar"><i style="width:${pct}%"></i></div>
-        <div class="spacer"></div>
-        <textarea class="lines" data-save="reading-notes" placeholder="Reading goals, favorite genres, reading time..." style="height:110px"></textarea>
-      </div>
-      <div class="card">
-        <h3>Add a Book</h3>
-        <div class="addbook">
-          <input id="bk-title" placeholder="Title">
-          <input id="bk-author" placeholder="Author">
-          <input id="bk-pages" type="number" min="0" placeholder="Pages">
-          <select id="bk-status">
-            <option>To Read</option><option>Reading</option><option>Finished</option>
-          </select>
-          <select id="bk-rating">
-            <option value="">Stars</option><option value="1">1</option><option value="2">2</option>
-            <option value="3">3</option><option value="4">4</option><option value="5">5</option>
-          </select>
-          <button class="btn" data-action="add-book">Add</button>
-        </div>
-      </div>
-    </div>
-    <div class="card scroll" style="margin-top:12px">
-      <table class="t">
-        <tr><th>Title</th><th>Author</th><th>Pages</th><th>Status</th><th>Rating</th><th></th></tr>
-        ${rows || '<tr><td colspan="6" class="muted">No books yet. Add your first one above.</td></tr>'}
-      </table>
-    </div>
-  </section>`;
-};
-
-PAGES.custom = () => {
-  const boxes = [1,2,3,4].map(i => `
-    <div class="card">
-      <input class="title-input" data-save="cs-t-${i}" placeholder="Custom Section ${i}">
-      <textarea class="lines" data-save="cs-x-${i}" placeholder="Write anything here..."></textarea>
-    </div>`).join('');
-  return `
-  <section class="page">
-    <div class="eyebrow">Custom Sections</div>
-    <h1>Your Notebooks</h1>
-    <div class="cgrid">${boxes}</div>
-  </section>`;
-};
-
-PAGES.notes = () => `
-  <section class="page">
-    <div class="eyebrow">Notes</div>
-    <h1>Notes &amp; Brainstorming</h1>
-    <div class="notes-wrap">
-      <div class="card">
-        <h3>Free Notes</h3>
-        <textarea class="dotted" data-save="notes-main" placeholder="Start writing..."></textarea>
-      </div>
-      <div class="card">
-        <h3>Brainstorm</h3>
-        <textarea class="lines" data-save="notes-brain" placeholder="Ideas, drafts, quick lists..."></textarea>
-      </div>
-    </div>
-  </section>`;
-
-/* =========================================================
-   NAVIGATION (SIDEBAR TABS)
-   ========================================================= */
-const TABS = [
-  {id:'cover',    label:'Cover',            href:() => '#cover'},
-  {id:'index',    label:'Index',            href:() => '#index'},
-  {id:'yearly',   label:'Yearly',           href:() => '#yearly'},
-  {id:'monthly',  label:'Monthly',          href:() => '#monthly/' + (store.lastMonth || 1)},
-  {id:'weekly',   label:'Weekly',           href:() => '#weekly/' + (store.lastWeek || '2027-01-01')},
-  {id:'daily',    label:'Daily',            href:() => '#daily/' + (store.lastDay || '2027-01-01')},
-  {id:'finance',  label:'Finance',          href:() => '#finance'},
-  {id:'wellness', label:'Wellness',         href:() => '#wellness/' + (store.lastWellMonth || 1)},
-  {id:'reading',  label:'Reading Journal',  href:() => '#reading'},
-  {id:'custom',   label:'Custom Sections',  href:() => '#custom'},
-  {id:'notes',    label:'Notes',            href:() => '#notes'}
+const SECTIONS = [
+  {key:'index',   label:'Index',   from:2,   to:2,   tab:'index'},
+  {key:'year',    label:'Year',    from:3,   to:4,   tab:'year'},
+  {key:'reading', label:'Reading', from:5,   to:20,  tab:'reading'},
+  {key:'monthly', label:'Month',   from:21,  to:44,  tab:'monthly'},
+  {key:'weekly',  label:'Week',    from:45,  to:148, tab:'weekly'},
+  {key:'daily',   label:'Daily',   from:149, to:513, tab:'daily'},
+  {key:'finance', label:'Finance', from:514, to:530, tab:'finance'},
+  {key:'notes',   label:'Notes',   from:531, to:560, tab:'notes'}
 ];
 
+/* =====================================================
+   STORAGE (kept in this browser only)
+   ===================================================== */
+let store = {};
+try { store = JSON.parse(localStorage.getItem('planner2027-ultimate')) || {}; } catch(e){ store = {}; }
+function persist(){ try { localStorage.setItem('planner2027-ultimate', JSON.stringify(store)); } catch(e){} }
+
+/* =====================================================
+   HELPERS
+   ===================================================== */
+const pad = n => String(n).padStart(2,'0');
+const dayOf = i => new Date(2027, 0, 1 + i);           // i = 0..364
+const idxOf = d => Math.round((d - new Date(2027,0,1)) / 864e5);
+const clamp = (n,a,b) => Math.min(b, Math.max(a, n));
+const ta = (k, ph='') => `<textarea class="notepad" data-k="${k}" placeholder="${ph}"></textarea>`;
+const inp = (k, ph='') => `<input class="ln" data-k="${k}" placeholder="${ph}">`;
+const head = (eb, title) => `<div class="eyebrow">${eb}</div><h1>${title}</h1>`;
+function sectionOf(n){ return SECTIONS.find(s => n >= s.from && n <= s.to); }
+function holidayName(d){ return OBS[(d.getMonth()+1)+'-'+d.getDate()] || ''; }
+
+/* Map every page number 1..560 to its layout */
+function plan(n){
+  if(n === 1)  return {t:'cover', n};
+  if(n === 2)  return {t:'index', n};
+  if(n <= 4)   return {t:'year', i:n-3, n};
+  if(n <= 20)  return {t:'reading', i:n-5, n};
+  if(n <= 44)  { const k = n-21; return {t:'month', m:Math.floor(k/2)+1, half:k%2, n}; }
+  if(n <= 148) { const k = n-45; return {t:'week', w:Math.floor(k/2)+1, half:k%2, n}; }
+  if(n <= 513) return {t:'daily', i:n-149, n};
+  if(n <= 530) return {t:'finance', i:n-514, n};
+  return {t:'notepad', i:n-531, n};
+}
+
+/* =====================================================
+   PAGE RENDERERS
+   ===================================================== */
+const R = {};
+
+R.cover = () => `
+  <section class="page cover">
+    <div class="frame"></div>
+    <div class="eb">2027 &middot; DIGITAL PLANNER</div>
+    <h1 class="hero">Intentional<br>&amp; Reading</h1>
+    <div class="rule"></div>
+    <p>Write your own story, one intentional day at a time.</p>
+    <a class="btn" href="#p/2">Enter Planner</a>
+  </section>`;
+
+R.index = () => {
+  const links = SECTIONS.map(s => `
+    <a href="#p/${s.from}">${s.label}<small>Pages ${s.from}&ndash;${s.to}</small></a>`).join('');
+  return `
+  <section class="page">
+    ${head('Master Index', 'Navigation Dashboard')}
+    <p class="muted" style="margin:0 0 6px">Click any section to jump instantly. Use the tabs on the right edge at any time. Your entries save automatically in this browser.</p>
+    <div class="idx">${links}</div>
+    <div style="height:14px"></div>
+    <div class="grid g2">
+      <div class="card">
+        <h3>Week starts on</h3>
+        <select class="ln" data-k="weekStart" style="width:auto">
+          <option value="sun">Sunday</option><option value="mon">Monday</option>
+        </select>
+      </div>
+      <div class="card">
+        <h3>Getting started</h3>
+        <p class="muted" style="margin:0;line-height:1.6">Open Yearly to set goals, use Monthly for planning, Weekly for the big picture, and Daily for time blocking. Print or save any page with the button above.</p>
+      </div>
+    </div>
+  </section>`;
+};
+
+R.year = (p) => {
+  if(p.i === 0){
+    const minis = MN.map((name,mi) => {
+      const first = new Date(2027, mi, 1).getDay();
+      const days = new Date(2027, mi+1, 0).getDate();
+      let g = DS.map(d => `<span class="h">${d[0]}</span>`).join('') + '<span></span>'.repeat(first);
+      for(let d=1; d<=days; d++) g += `<span>${d}</span>`;
+      return `<div class="mini"><a href="#p/${21 + mi*2}">${name}</a><div class="mg">${g}</div></div>`;
+    }).join('');
+    return `
+    <section class="page">
+      ${head('Yearly Overview', 'Year at a Glance &middot; 2027')}
+      <div class="grid g4" style="grid-template-columns:repeat(4,1fr);gap:8px">${minis}</div>
+    </section>`;
+  }
+  const goals = [1,2,3,4,5].map(i => `<div style="margin:4px 0">${inp('goal'+i, 'Annual goal '+i)}</div>`).join('');
+  const qs = ['Q1','Q2','Q3','Q4'].map((q,i) => `<div style="margin:4px 0">${inp('q'+i, q+' milestone')}</div>`).join('');
+  return `
+  <section class="page">
+    ${head('Yearly Overview', 'Vision &amp; Annual Goals')}
+    <div class="grid g2" style="height:calc(100% - 80px)">
+      <div class="flex">
+        <div class="card"><h3>Vision Board</h3>${ta('vision','Describe the life you are building...')}</div>
+      </div>
+      <div class="flex">
+        <div class="card"><h3>Top 5 Annual Goals</h3>${goals}</div>
+        <div class="card"><h3>Quarterly Milestones</h3>${qs}</div>
+      </div>
+    </div>
+  </section>`;
+};
+
+R.reading = (p) => {
+  const i = p.i;
+  if(i < 4){
+    const rows = Array.from({length:12}, (_,r) => `
+      <tr><td>${inp(`shelf${p.n}-${r}-t`,'Title')}</td><td>${inp(`shelf${p.n}-${r}-a`,'Author')}</td><td>${inp(`shelf${p.n}-${r}-g`,'Genre')}</td></tr>`).join('');
+    return `
+    <section class="page">
+      ${head('Reading Journal &middot; Library Shelf', 'Library Shelf')}
+      <div class="card" style="height:calc(100% - 80px);overflow:auto"><table class="t">
+        <tr><th>Title</th><th>Author</th><th>Genre</th></tr>${rows}</table></div>
+    </section>`;
+  }
+  if(i < 10){
+    return `
+    <section class="page">
+      ${head('Reading Journal &middot; Book Review', 'Book Review')}
+      <div class="grid g2" style="margin-bottom:10px">
+        <div class="card">${inp(`rv${p.n}-title`,'Book title')}${inp(`rv${p.n}-author`,'Author')}${inp(`rv${p.n}-date`,'Date finished')}</div>
+        <div class="card"><h3>Rating</h3>${inp(`rv${p.n}-rating`,'Stars 1-5')}</div>
+      </div>
+      <div style="height:calc(100% - 170px)">${ta(`rv${p.n}-review`,'Your review, favorite quotes, and takeaways...')}</div>
+    </section>`;
+  }
+  if(i < 13){
+    const rows = Array.from({length:10}, (_,r) => `
+      <tr><td>${r+1}</td><td>${inp(`se${p.n}-${r}-b`,'Book')}</td><td>${inp(`se${p.n}-${r}-s`,'Status')}</td></tr>`).join('');
+    return `
+    <section class="page">
+      ${head('Reading Journal &middot; Series Tracker', 'Series Tracker')}
+      ${inp(`se${p.n}-name`,'Series name')}
+      <div class="card" style="margin-top:10px;height:calc(100% - 130px);overflow:auto"><table class="t">
+        <tr><th>#</th><th>Book</th><th>Status</th></tr>${rows}</table></div>
+    </section>`;
+  }
+  const boxes = Array.from({length:52}, (_,w) =>
+    `<button class="box ${store['rc'+(w+1)]?'on':''}" data-t="rc${w+1}">${w+1}</button>`).join('');
+  return `
+  <section class="page">
+    ${head('Reading Journal &middot; Challenge', 'Reading Challenge 2027')}
+    <div class="grid g2" style="margin-bottom:10px">
+      <div class="card"><h3>Goal</h3>${inp('rc-goal','Books to read in 2027')}</div>
+      <div class="card"><h3>Books finished</h3>${inp('rc-done','Number finished')}</div>
+    </div>
+    <div class="card"><h3>Weekly progress &middot; tap a week when you finish a reading session</h3>
+      <div class="chk" style="grid-template-columns:repeat(13,1fr)">${boxes}</div>
+    </div>
+  </section>`;
+};
+
+R.month = (p) => {
+  const m = p.m;
+  if(p.half === 0){
+    const first = new Date(2027, m-1, 1).getDay();
+    const days = new Date(2027, m, 0).getDate();
+    let cells = DS.map(d => `<div class="dh">${d}</div>`).join('');
+    cells += '<div class="blank"></div>'.repeat(first);
+    for(let d=1; d<=days; d++){
+      const di = idxOf(new Date(2027,m-1,d));
+      const h = holidayName(new Date(2027,m-1,d));
+      cells += `<a class="${h?'hol':''}" href="#p/${149+di}">${d}${h?`<small>${h}</small>`:''}</a>`;
+    }
+    return `
+    <section class="page">
+      ${head('Monthly View &middot; 2027', MN[m-1])}
+      <div class="cal">${cells}</div>
+    </section>`;
+  }
+  return `
+  <section class="page">
+    ${head('Monthly View &middot; 2027', MN[m-1] + ' &middot; Planning')}
+    <div class="grid g2" style="height:calc(100% - 80px)">
+      <div class="flex">
+        <div class="card" style="flex:1;display:flex;flex-direction:column"><h3>Monthly Goals</h3>${ta(`mg${m}`,'Top goals this month...')}</div>
+        <div class="card"><h3>Key Dates</h3>${inp(`kd${m}-1`,'Date and event')}${inp(`kd${m}-2`,'Date and event')}</div>
+      </div>
+      <div class="flex">
+        <div class="card" style="flex:1;display:flex;flex-direction:column"><h3>Monthly Review</h3>${ta(`mr${m}`,'Wins, lessons, and changes for next month...')}</div>
+      </div>
+    </div>
+  </section>`;
+};
+
+R.week = (p) => {
+  const start = (p.w - 1) * 7;
+  const count = p.w === 52 ? 8 : 7;
+  const label = `${MN[dayOf(start).getMonth()].slice(0,3)} ${dayOf(start).getDate()} &ndash; ${MN[dayOf(start+count-1).getMonth()].slice(0,3)} ${dayOf(start+count-1).getDate()}`;
+  if(p.half === 0){
+    const cards = Array.from({length:count}, (_,j) => {
+      const d = dayOf(start + j);
+      const h = holidayName(d);
+      return `<div class="card flex" style="gap:6px;padding:8px">
+        <a href="#p/${149+start+j}" style="text-decoration:none;color:var(--ink);font-family:'Playfair Display',serif;font-weight:600;font-size:14px">${DS[d.getDay()]} ${d.getDate()}</a>
+        ${h?`<small style="color:var(--t2);font-size:9px">${h}</small>`:''}
+        <div class="fill">${ta(`w${p.w}-d${j}`,'Plans...')}</div>
+      </div>`;
+    }).join('');
+    return `
+    <section class="page">
+      ${head('Weekly View &middot; Week '+p.w, label)}
+      <div class="grid" style="grid-template-columns:repeat(${count},1fr);gap:8px;height:calc(100% - 80px)">${cards}</div>
+    </section>`;
+  }
+  return `
+  <section class="page">
+    ${head('Weekly View &middot; Week '+p.w, 'Priorities &amp; Reflection')}
+    <div class="grid g2" style="height:calc(100% - 80px)">
+      <div class="card" style="display:flex;flex-direction:column"><h3>Top Priorities</h3>${inp(`w${p.w}-p1`,'1.')}${inp(`w${p.w}-p2`,'2.')}${inp(`w${p.w}-p3`,'3.')}
+        <div style="margin-top:8px;flex:1">${ta(`w${p.w}-notes`,'Notes for this week...')}</div></div>
+      <div class="card" style="display:flex;flex-direction:column"><h3>Weekly Reflection</h3>${ta(`w${p.w}-ref`,'What worked, what did not, and what I am grateful for...')}</div>
+    </div>
+  </section>`;
+};
+
+R.daily = (p) => {
+  const d = dayOf(p.i);
+  const h = holidayName(d);
+  const label = `${DN[d.getDay()]}, ${MN[d.getMonth()]} ${d.getDate()}, 2027`;
+  const hours = Array.from({length:17}, (_,j) => {
+    const hr = 6 + j;
+    return `<div class="hrow"><div class="t">${pad(hr)}:00</div><input data-k="d${p.i}-h${hr}" aria-label="${hr}:00"></div>`;
+  }).join('');
+  return `
+  <section class="page">
+    ${head('Daily View' + (h?' &middot; '+h:''), label)}
+    <div class="grid" style="grid-template-columns:1.1fr 1fr;gap:14px;height:calc(100% - 80px)">
+      <div class="sched">${hours}</div>
+      <div class="flex">
+        <div class="card"><h3>Top 3 Priorities</h3>${inp(`d${p.i}-p1`,'1.')}${inp(`d${p.i}-p2`,'2.')}${inp(`d${p.i}-p3`,'3.')}</div>
+        <div class="fill" style="display:flex;flex-direction:column">${ta(`d${p.i}-notes`,'')}</div>
+      </div>
+    </div>
+  </section>`;
+};
+
+R.finance = (p) => {
+  const i = p.i;
+  if(i === 0){
+    return `
+    <section class="page">
+      ${head('Finance', 'Financial Overview 2027')}
+      <div class="grid g2">
+        <div class="card"><h3>Annual Income Goal</h3>${inp('fin-income-goal','Amount')}</div>
+        <div class="card"><h3>Annual Savings Goal</h3>${inp('fin-save-goal','Amount')}</div>
+      </div>
+      <div style="height:14px"></div>
+      <div class="card"><h3>Notes</h3>${ta('fin-overview-notes','Money goals, reviews, and reminders...')}</div>
+    </section>`;
+  }
+  if(i <= 12){
+    const m = i;
+    const rows = BUDGET.map((c,j) => `
+      <tr><td>${c}</td><td><input type="number" min="0" step="0.01" class="ln bp" data-k="b${m}-p${j}" placeholder="0.00"></td><td><input type="number" min="0" step="0.01" class="ln ba" data-k="b${m}-a${j}" placeholder="0.00"></td></tr>`).join('');
+    return `
+    <section class="page">
+      ${head('Finance &middot; Budget', MN[m-1] + ' Budget')}
+      <div class="grid g2" style="grid-template-columns:1.3fr 1fr">
+        <div class="card"><table class="t">
+          <tr><th>Category</th><th>Planned (USD)</th><th>Actual (USD)</th></tr>${rows}
+          <tr><td><b>Total</b></td><td><b class="tot-p" data-m="${m}">0.00</b></td><td><b class="tot-a" data-m="${m}">0.00</b></td></tr>
+        </table></div>
+        <div class="card" style="display:flex;flex-direction:column"><h3>Notes</h3>${ta(`b${m}-notes`,'Spending notes...')}</div>
+      </div>
+    </section>`;
+  }
+  if(i === 13 || i === 14){
+    const rows = Array.from({length:4}, (_,r) => `
+      <tr><td>${inp(`sv${p.n}-${r}-n`,'Goal')}</td><td>${inp(`sv${p.n}-${r}-t`,'Target')}</td><td>${inp(`sv${p.n}-${r}-s`,'Saved')}</td></tr>`).join('');
+    return `
+    <section class="page">
+      ${head('Finance &middot; Savings', 'Savings Goals')}
+      <div class="card"><table class="t"><tr><th>Goal</th><th>Target</th><th>Saved</th></tr>${rows}</table></div>
+    </section>`;
+  }
+  if(i === 15){
+    const rows = Array.from({length:6}, (_,r) => `
+      <tr><td>${inp(`dt${r}-n`,'Debt')}</td><td>${inp(`dt${r}-b`,'Balance')}</td><td>${inp(`dt${r}-r`,'Rate %')}</td><td>${inp(`dt${r}-m`,'Payment')}</td></tr>`).join('');
+    return `
+    <section class="page">
+      ${head('Finance &middot; Debt', 'Debt Payoff Tracker')}
+      <div class="card"><table class="t"><tr><th>Debt</th><th>Balance</th><th>Rate</th><th>Monthly</th></tr>${rows}</table></div>
+    </section>`;
+  }
+  const cols = Array.from({length:31}, (_,d) => `<div class="hd">${d+1}</div>`).join('');
+  const hrows = HABITS.map((h,hi) => {
+    const boxes = Array.from({length:31}, (_,d) =>
+      `<button class="box ${store[`hm-${hi}-${d+1}`]?'on':''}" data-t="hm-${hi}-${d+1}" aria-label="${h} day ${d+1}"></button>`).join('');
+    return `<div class="hn">${h}</div>${boxes}`;
+  }).join('');
+  return `
+  <section class="page">
+    ${head('Finance &amp; Habits', 'Habit Matrix &middot; Day Columns')}
+    <p class="muted" style="margin:0 0 8px">Tap a box to mark a day done. Rename habits by editing the field below.</p>
+    <div class="card" style="overflow:auto">
+      <div class="habits" style="grid-template-columns:150px repeat(31,1fr)">
+        <div></div>${cols}${hrows}
+      </div>
+    </div>
+  </section>`;
+};
+
+R.notepad = (p) => `
+  <section class="page">
+    ${head('Custom Notepad', 'Notepad ' + (p.i + 1))}
+    <div style="height:calc(100% - 80px)">${ta(`np${p.n}`,'')}</div>
+  </section>`;
+
+/* =====================================================
+   ROUTING & RENDERING
+   ===================================================== */
 const stage = document.getElementById('stage');
 const tabsEl = document.getElementById('tabs');
+let current = 1;
 
-function renderTabs(active){
-  tabsEl.innerHTML = TABS.map(t =>
-    `<a class="tab ${t.id === active ? 'on' : ''}" href="${t.href()}">${t.label}</a>`
+function currentFromHash(){
+  const m = location.hash.match(/#p\/(\d+)/);
+  return clamp(m ? parseInt(m[1],10) : 1, 1, TOTAL);
+}
+
+function renderTabs(n){
+  const sec = sectionOf(n);
+  const active = sec ? sec.key : '';
+  tabsEl.innerHTML = SECTIONS.map(s =>
+    `<a class="tab ${s.key===active?'on':''}" href="#p/${s.from}">${s.label}</a>`
   ).join('');
 }
 
 function restoreFields(){
-  document.querySelectorAll('[data-save]').forEach(el => {
-    const v = store[el.dataset.save];
-    if(v !== undefined) el.value = v;
+  document.querySelectorAll('[data-k]').forEach(el => {
+    const v = store[el.dataset.k];
+    if(v !== undefined && el.tagName !== 'BUTTON') el.value = v;
   });
-  recalcFinance();
+  recalcBudgets();
 }
 
-function route(){
-  const raw = decodeURIComponent(location.hash.replace('#','')) || 'cover';
-  const [name, param] = raw.split('/');
-  const pageName = PAGES[name] ? name : 'cover';
-  stage.innerHTML = PAGES[pageName](param);
-  restoreFields();
-  renderTabs(pageName);
+function show(n){
+  current = clamp(n, 1, TOTAL);
+  const p = plan(current);
+  stage.innerHTML = `<div class="book-page" style="position:absolute;inset:0">${R[p.t](p)}</div>`;
   const page = stage.querySelector('.page');
   if(page) page.scrollTop = 0;
-  save();
+  restoreFields();
+  renderTabs(current);
+  document.getElementById('pgLabel').textContent = `Page ${current} of ${TOTAL}`;
+  document.getElementById('jump').value = '';
+  persist();
 }
 
-/* =========================================================
-   FINANCE TOTALS
-   ========================================================= */
-function recalcFinance(){
-  const plan = [...document.querySelectorAll('.fin-plan')].reduce((s,el) => s + (parseFloat(el.value) || 0), 0);
-  const act  = [...document.querySelectorAll('.fin-act')].reduce((s,el) => s + (parseFloat(el.value) || 0), 0);
-  const set = (id,v) => { const el = document.getElementById(id); if(el) el.textContent = fmt(v); };
-  set('fin-plan-total', plan);
-  set('fin-act-total', act);
-  set('fin-left', plan - act);
+function route(){ show(currentFromHash()); }
+
+/* =====================================================
+   BUDGET TOTALS
+   ===================================================== */
+function recalcBudgets(){
+  document.querySelectorAll('.tot-p').forEach(el => {
+    const m = el.dataset.m;
+    const sum = [...document.querySelectorAll(`[data-k^="b${m}-p"]`)].reduce((s,x)=>s+(parseFloat(x.value)||0),0);
+    el.textContent = sum.toFixed(2);
+  });
+  document.querySelectorAll('.tot-a').forEach(el => {
+    const m = el.dataset.m;
+    const sum = [...document.querySelectorAll(`[data-k^="b${m}-a"]`)].reduce((s,x)=>s+(parseFloat(x.value)||0),0);
+    el.textContent = sum.toFixed(2);
+  });
 }
 
-/* =========================================================
+/* =====================================================
    EVENTS
-   ========================================================= */
+   ===================================================== */
 document.addEventListener('input', e => {
   const t = e.target;
-  if(t.dataset && t.dataset.save){
-    store[t.dataset.save] = t.value;
-    save();
+  if(t.dataset && t.dataset.k){
+    store[t.dataset.k] = t.value;
+    if(t.classList.contains('bp') || t.classList.contains('ba')) recalcBudgets();
+    persist();
   }
-  if(t.classList && t.classList.contains('fin')) recalcFinance();
 });
 
 document.addEventListener('change', e => {
   const t = e.target;
-  if(t.dataset && t.dataset.save){
-    store[t.dataset.save] = t.value;
-    save();
-    if(t.dataset.rerender) route();
+  if(t.dataset && t.dataset.k){
+    store[t.dataset.k] = t.value;
+    persist();
   }
 });
 
 document.addEventListener('click', e => {
-  const tg = e.target.closest('[data-toggle]');
+  const tg = e.target.closest('[data-t]');
   if(tg){
-    const k = tg.dataset.toggle;
+    const k = tg.dataset.t;
     store[k] = !store[k];
-    save();
     tg.classList.toggle('on', !!store[k]);
-    tg.setAttribute('aria-pressed', !!store[k]);
-    return;
-  }
-
-  const act = e.target.closest('[data-action]');
-  if(!act) return;
-  const type = act.dataset.action;
-
-  if(type === 'print'){
-    window.print();
-  }
-
-  if(type === 'add-book'){
-    const title = document.getElementById('bk-title').value.trim();
-    if(!title) return;
-    const books = Array.isArray(store.books) ? store.books : [];
-    books.push({
-      title,
-      author: document.getElementById('bk-author').value.trim(),
-      pages: document.getElementById('bk-pages').value,
-      status: document.getElementById('bk-status').value,
-      rating: document.getElementById('bk-rating').value
-    });
-    store.books = books;
-    save();
-    route();
-  }
-
-  if(type === 'del-book'){
-    const i = parseInt(act.dataset.i, 10);
-    const books = Array.isArray(store.books) ? store.books : [];
-    if(!isNaN(i)){
-      books.splice(i,1);
-      store.books = books;
-      save();
-      route();
-    }
+    persist();
   }
 });
 
+document.getElementById('prev').onclick = () => { location.hash = '#p/' + Math.max(1, current-1); };
+document.getElementById('next').onclick = () => { location.hash = '#p/' + Math.min(TOTAL, current+1); };
+document.getElementById('printBtn').onclick = () => window.print();
+document.getElementById('jump').addEventListener('keydown', e => {
+  if(e.key === 'Enter'){
+    const n = clamp(parseInt(e.target.value,10) || 1, 1, TOTAL);
+    location.hash = '#p/' + n;
+  }
+});
+
+/* Arrow keys flip pages when not typing */
+document.addEventListener('keydown', e => {
+  if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)) return;
+  if(e.key === 'ArrowRight') location.hash = '#p/' + Math.min(TOTAL, current+1);
+  if(e.key === 'ArrowLeft')  location.hash = '#p/' + Math.max(1, current-1);
+});
+
+/* Swipe to flip pages on tablet */
+let touchX = null;
+stage.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, {passive:true});
+stage.addEventListener('touchend', e => {
+  if(touchX === null) return;
+  const dx = e.changedTouches[0].clientX - touchX;
+  if(Math.abs(dx) > 60){
+    location.hash = dx < 0 ? '#p/' + Math.min(TOTAL, current+1) : '#p/' + Math.max(1, current-1);
+  }
+  touchX = null;
+});
+
 window.addEventListener('hashchange', route);
+if(!location.hash) location.hash = '#p/1';
 route();
 </script>
 </body>
