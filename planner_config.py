@@ -7,6 +7,7 @@ COLORS = {
     "gold": "#C4A66A",
     "white": "#FFFFFF",
     "light_gray": "#E8E5DE",
+    "forest": "#34483A",
 }
 
 TABS = [
