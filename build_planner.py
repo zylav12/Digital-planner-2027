@@ -13,6 +13,16 @@ OUTPUT = "2027-Intentional-Life-Planner.pdf"
 W, H = landscape(A4)
 YEAR = 2027
 
+# Stable named destinations used by the PDF's navigation tabs and contents page.
+SECTION_DESTINATIONS = {
+    "HOME": "section-home",
+    "GOALS": "section-goals",
+    "MONTH": "section-month",
+    "WEEK": "section-week",
+    "DAY": "section-day",
+    "NOTES": "section-notes",
+}
+
 BG = COLORS["ivory"]
 SAGE = COLORS["sage"]
 FOREST = COLORS["forest"]
@@ -89,10 +99,26 @@ def tabs(c, active="HOME"):
         centered(c, x + 21, y + 11, label, 5.5,
                  WHITE if label == active else FOREST,
                  "Helvetica-Bold")
+        destination = SECTION_DESTINATIONS.get(key)
+        if destination:
+            c.linkRect(
+                "",
+                destination,
+                (x, y, x + 42, y + 29),
+                relative=0,
+                thickness=0,
+            )
         y -= 35
 
 
-def new_page(c, number, title, subtitle=None, active="HOME"):
+def new_page(c, number, title, subtitle=None, active="HOME",
+             destination=None, bookmark=None):
+    # Every page has its own destination, even when it is not a section entry.
+    c.bookmarkPage("page-%04d" % number)
+    if destination:
+        c.bookmarkPage(destination)
+        if bookmark:
+            c.addOutlineEntry(bookmark, destination, level=0)
     background(c)
     heading(c, title, subtitle)
     tabs(c, active)
@@ -120,6 +146,9 @@ def checkbox_list(c, x, y, w, count, spacing=23):
 
 
 def cover(c):
+    c.bookmarkPage("page-0001")
+    c.bookmarkPage("section-cover")
+    c.addOutlineEntry("Cover", "section-cover", level=0)
     background(c)
     c.setStrokeColor(SAGE)
     c.setLineWidth(1.5)
@@ -145,7 +174,9 @@ def cover(c):
 
 def index_page(c, number):
     new_page(c, number, "Welcome to Your Year",
-             "A thoughtful space to plan, reflect and grow.")
+             "A thoughtful space to plan, reflect and grow.",
+             destination=SECTION_DESTINATIONS["HOME"],
+             bookmark="Home / Contents")
     items = [
         ("01", "Year at a Glance", "See the bigger picture"),
         ("02", "Goals & Intentions", "Choose what matters"),
@@ -155,11 +186,28 @@ def index_page(c, number):
         ("06", "Notes & Reflection", "Capture thoughts and ideas"),
     ]
     x, y, w, h = LEFT, H - 125, 315, 52
+    item_destinations = {
+        "Year at a Glance": SECTION_DESTINATIONS["GOALS"],
+        "Goals & Intentions": SECTION_DESTINATIONS["GOALS"],
+        "Monthly Planning": SECTION_DESTINATIONS["MONTH"],
+        "Weekly Planning": SECTION_DESTINATIONS["WEEK"],
+        "Daily Planning": SECTION_DESTINATIONS["DAY"],
+        "Notes & Reflection": SECTION_DESTINATIONS["NOTES"],
+    }
     for num, title, desc in items:
         rounded(c, x, y - h, w, h - 7, WHITE, BEIGE, 8)
         text(c, x + 13, y - 25, num, 10, FOREST, "Helvetica-Bold")
         text(c, x + 47, y - 23, title, 10, DARK, "Helvetica-Bold")
         text(c, x + 47, y - 38, desc, 8, MUTED)
+        destination = item_destinations.get(title)
+        if destination:
+            c.linkRect(
+                "",
+                destination,
+                (x, y - h, x + w, y - 7),
+                relative=0,
+                thickness=0,
+            )
         y -= h
 
     card(c, 390, 130, 300, 205, "MY WORD FOR 2027")
@@ -170,7 +218,9 @@ def index_page(c, number):
 
 def yearly_page(c, number):
     new_page(c, number, "2027 Year at a Glance",
-             "Make room for the year you want to create.", "GOALS")
+             "Make room for the year you want to create.", "GOALS",
+             destination=SECTION_DESTINATIONS["GOALS"],
+             bookmark="Goals & Yearly Overview")
 
     months = list(calendar.month_name)[1:]
     cell_w, cell_h = 145, 82
@@ -217,7 +267,10 @@ def goal_page(c, number, index):
 def month_page(c, number, month_index):
     month = calendar.month_name[month_index]
     new_page(c, number, f"{month} 2027",
-             "Monthly overview, priorities and reflection.", "MONTH")
+             "Monthly overview, priorities and reflection.", "MONTH",
+             destination=(SECTION_DESTINATIONS["MONTH"]
+                          if month_index == 1 else None),
+             bookmark="Monthly Planning" if month_index == 1 else None)
 
     card(c, LEFT, 260, 300, 85, "MONTHLY INTENTION")
     writing_lines(c, LEFT + 12, 308, 275, 2, 23)
@@ -254,7 +307,10 @@ def month_page(c, number, month_index):
 def week_page(c, number, week_start, week_num):
     week_end = week_start + timedelta(days=6)
     new_page(c, number, f"Weekly Plan • Week {week_num:02d}",
-             f"{week_start:%d %b} – {week_end:%d %b %Y}", "WEEK")
+             f"{week_start:%d %b} – {week_end:%d %b %Y}", "WEEK",
+             destination=(SECTION_DESTINATIONS["WEEK"]
+                          if week_num == 1 else None),
+             bookmark="Weekly Planning" if week_num == 1 else None)
 
     card(c, LEFT, 270, 300, 75, "WEEKLY FOCUS")
     writing_lines(c, LEFT + 12, 312, 275, 2, 22)
@@ -286,7 +342,11 @@ def week_page(c, number, week_start, week_num):
 def day_page(c, number, current):
     date_title = current.strftime("%A, %d %B %Y")
     new_page(c, number, date_title,
-             "A new day to live with intention.", "DAY")
+             "A new day to live with intention.", "DAY",
+             destination=(SECTION_DESTINATIONS["DAY"]
+                          if current == date(YEAR, 1, 1) else None),
+             bookmark="Daily Planning"
+             if current == date(YEAR, 1, 1) else None)
 
     card(c, LEFT, 275, 300, 70, "TODAY'S INTENTION")
     writing_lines(c, LEFT + 12, 310, 275, 2, 22)
@@ -310,7 +370,10 @@ def day_page(c, number, current):
 
 def notes_page(c, number, index):
     new_page(c, number, f"Notes & Ideas • {index:02d}",
-             "A little space for everything on your mind.", "NOTES")
+             "A little space for everything on your mind.", "NOTES",
+             destination=(SECTION_DESTINATIONS["NOTES"]
+                          if index == 1 else None),
+             bookmark="Notes & Reflection" if index == 1 else None)
     card(c, LEFT, 65, RIGHT - LEFT - 75, 280, "NOTES")
     writing_lines(c, LEFT + 14, 310, RIGHT - LEFT - 105, 14, 17)
     c.showPage()
@@ -341,10 +404,14 @@ def build():
     first_monday = date(YEAR, 1, 1)
     first_monday -= timedelta(days=first_monday.weekday())
 
-    for week in range(1, 53):
+    week_start = first_monday
+    week_number = 1
+    year_end = date(YEAR, 12, 31)
+    while week_start <= year_end:
         page_number += 1
-        start = first_monday + timedelta(days=(week - 1) * 7)
-        week_page(c, page_number, start, week)
+        week_page(c, page_number, week_start, week_number)
+        week_start += timedelta(days=7)
+        week_number += 1
 
     current = date(YEAR, 1, 1)
     for _ in range(365):
