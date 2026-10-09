@@ -16,6 +16,7 @@ YEAR = 2027
 # Stable named destinations used by the PDF's navigation tabs and contents page.
 SECTION_DESTINATIONS = {
     "HOME": "section-home",
+    "YEAR": "section-year",
     "GOALS": "section-goals",
     "MONTH": "section-month",
     "WEEK": "section-week",
@@ -187,7 +188,7 @@ def index_page(c, number):
     ]
     x, y, w, h = LEFT, H - 125, 315, 52
     item_destinations = {
-        "Year at a Glance": SECTION_DESTINATIONS["GOALS"],
+        "Year at a Glance": SECTION_DESTINATIONS["YEAR"],
         "Goals & Intentions": SECTION_DESTINATIONS["GOALS"],
         "Monthly Planning": SECTION_DESTINATIONS["MONTH"],
         "Weekly Planning": SECTION_DESTINATIONS["WEEK"],
@@ -219,8 +220,8 @@ def index_page(c, number):
 def yearly_page(c, number):
     new_page(c, number, "2027 Year at a Glance",
              "Make room for the year you want to create.", "GOALS",
-             destination=SECTION_DESTINATIONS["GOALS"],
-             bookmark="Goals & Yearly Overview")
+             destination=SECTION_DESTINATIONS["YEAR"],
+             bookmark="Year at a Glance")
 
     months = list(calendar.month_name)[1:]
     cell_w, cell_h = 145, 82
@@ -248,7 +249,9 @@ def goal_page(c, number, index):
     ]
     title = names[index]
     new_page(c, number, title, "Design a life aligned with your values.",
-             "GOALS")
+             "GOALS",
+             destination=(SECTION_DESTINATIONS["GOALS"] if index == 0 else None),
+             bookmark="Goals & Intentions" if index == 0 else None)
 
     card(c, LEFT, 220, 310, 125, "WHAT DO I WANT?")
     writing_lines(c, LEFT + 12, 315, 285, 4, 22)
