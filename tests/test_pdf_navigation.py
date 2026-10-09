@@ -31,10 +31,9 @@ class PlannerPdfNavigationTests(unittest.TestCase):
         self.assertEqual(starts[0], date(2026, 12, 28))
         self.assertEqual(starts[-1], date(2027, 12, 27))
         for start in starts:
-            self.assertLessEqual(start.year, 2027)
-            self.assertGreaterEqual((start.replace(year=start.year) -
-                                     date(2027, 1, 1)).days, -6)
-        self.assertTrue(any(start == date(2027, 12, 27) for start in starts))
+            self.assertLessEqual(start, date(2027, 12, 31))
+            self.assertGreaterEqual((start - date(2027, 1, 1)).days + 6, 0)
+        self.assertIn(date(2027, 12, 27), starts)
 
     def test_each_page_has_a_unique_named_destination(self):
         destinations = self.reader.named_destinations
@@ -90,7 +89,8 @@ class PlannerPdfNavigationTests(unittest.TestCase):
         for title in (
             "Cover",
             "Home / Contents",
-            "Goals & Yearly Overview",
+            "Year at a Glance",
+            "Goals & Intentions",
             "Monthly Planning",
             "Weekly Planning",
             "Daily Planning",
