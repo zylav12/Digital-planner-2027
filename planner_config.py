@@ -1,4 +1,3 @@
-
 COLORS = {
     "ivory": "#F8F5EE",
     "sage": "#A3AD98",
@@ -8,7 +7,9 @@ COLORS = {
     "white": "#FFFFFF",
     "light_gray": "#E8E5DE",
     "forest": "#34483A",
+    "taupe": "#A18D7A",
 }
+
 
 TABS = [
     "Home",
