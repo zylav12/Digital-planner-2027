@@ -379,6 +379,16 @@ def notes_page(c, number, index):
     c.showPage()
 
 
+def week_starts(year):
+    """Return Monday starts for every week that overlaps the given year."""
+    first_day = date(year, 1, 1)
+    week_start = first_day - timedelta(days=first_day.weekday())
+    year_end = date(year, 12, 31)
+    while week_start <= year_end:
+        yield week_start
+        week_start += timedelta(days=7)
+
+
 def build():
     c = canvas.Canvas(OUTPUT, pagesize=(W, H))
     c.setTitle("2027 Intentional Life Planner")
@@ -401,17 +411,9 @@ def build():
         page_number += 1
         month_page(c, page_number, month)
 
-    first_monday = date(YEAR, 1, 1)
-    first_monday -= timedelta(days=first_monday.weekday())
-
-    week_start = first_monday
-    week_number = 1
-    year_end = date(YEAR, 12, 31)
-    while week_start <= year_end:
+    for week_number, week_start in enumerate(week_starts(YEAR), start=1):
         page_number += 1
         week_page(c, page_number, week_start, week_number)
-        week_start += timedelta(days=7)
-        week_number += 1
 
     current = date(YEAR, 1, 1)
     for _ in range(365):
